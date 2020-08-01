@@ -1,0 +1,5 @@
+input:not([type]), input:not([type]):focus:not([readonly]) {
+    border-bottom: none !important;
+    box-shadow: none !important;
+}
+

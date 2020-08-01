@@ -1,0 +1,6 @@
+<div class="info-pot">
+    <span (mouseover)="showInfo()" (mouseleave)="hideInfo()"><i class="fas fa-info-circle"></i></span>
+    <div class="info-box" [id]="data.ID" #infoBox>
+        <p>{{data.info}}</p>
+    </div>
+</div>

@@ -1,0 +1,104 @@
+<div class="container" id="Gdev-new-form">
+    <form onsubmit="return false" action="#" #addForm="ngForm">
+        <!-- 
+            Asigna el nombre del formulario.
+            Si ya existe, no se muestra 
+        -->
+
+        <div class="row" id="form-name" *ngIf="!formName">
+            <div class="col s12 input-field">
+                <input
+                    type="text"
+                    name="formName"
+                    id="formName"
+                    [(ngModel)]="newFormName"
+                />
+                <label for="formName" [ngClass]="{ active: formName }"
+                    >Nombre del formulario</label
+                >
+            </div>
+        </div>
+
+        <!-- ---------------------- -->
+        <div class="row">
+            <!-- Columna de editor de campos -->
+
+            <div
+                class="col {{ _formConst.mediaWidth }}"
+                id="field-list"
+                cdkDropList
+                (cdkDropListDropped)="drop($event)"
+            >
+                <div
+                    class="field-item"
+                    *ngFor="let field of Fields; trackBy: trackByFn"
+                    cdkDrag
+                    (mousedown)="grabEffect()"
+                    [ngClass]="{'deleted': field.estado == 'deleted'}"
+                    
+                >
+                    <mat-expansion-panel 
+                        [expanded]="field.estado == 'nuevo'"
+                        [disabled]="field.estado == 'deleted'"
+                        >
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                {{ field.etiqueta }}
+                            </mat-panel-title>
+                            <mat-panel-description>
+                                {{ fieldType(field.tipo) }}
+                            </mat-panel-description>
+                            <span
+                                class="delField"
+                                (click)="delField(field.etiqueta)"
+                            >
+                                <i class="fas fa-trash red-text"></i>
+                            </span>
+                        </mat-expansion-panel-header>
+
+                        <!-- Formulario de nuevo field -->
+                        <div class="fieldForm">
+                            <Gdev-field-adder 
+                                [field]="field"
+                                [selectedFieldTypes]="fieldTypes"
+                                (fieldChanges)="catchFieldsChanges($event)"
+                            >
+                            </Gdev-field-adder>
+                        </div>
+                    </mat-expansion-panel>
+                </div>
+
+                <button class="btn waves-effect" (click)="agregarCampo()">
+                    Agregar Campo
+                </button>
+            </div>
+
+            <!-- Previsualización de formulario -->
+
+            <div *ngIf="_formConst.Preview" class="col {{ _formConst.mediaWidth }}">
+                <div class="formPreview">
+                    <h5>Vista previa</h5>
+                    <Gdev-fields-render
+                        *ngFor="let field of Fields"
+                        [field]="field"
+                    >
+                    </Gdev-fields-render>
+                </div>
+            </div>
+        </div>
+
+        <!-- GUARDAR CAMBIOS -->
+
+        <div class="row" id="save-fields">
+            <div class="col s12 center">
+                <button
+                    class="btn waves-effect"
+                    [disabled]="autoDisableButton && !changes"
+                    (click)="saveForm()"
+                >
+                    Guardar formulario
+                </button>
+            </div>
+        </div>
+    </form>
+</div>

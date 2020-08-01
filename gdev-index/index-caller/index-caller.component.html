@@ -1,0 +1,11 @@
+<div class="row" >
+    <div class="col s2">
+        <button mat-raised-button [color]="'primary'" (click)="_index.getPrevPage()" [disabled]="first<=1">Atrás</button>
+    </div>
+    <div class="col s8 center ltxt">
+        Mostrando del {{first}} al {{last}} de {{prodCant}}
+    </div>
+    <div class="col s2">
+        <button mat-raised-button [color]="'primary'" (click)="_index.getNextPage()" [disabled]="last>=prodCant">Siguiente</button>
+    </div>
+</div>

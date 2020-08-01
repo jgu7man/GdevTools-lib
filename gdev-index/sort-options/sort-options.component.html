@@ -1,0 +1,81 @@
+<div class="row" *ngIf="sortOptions && sort_fields">
+    <div class="col s6 m3">
+        <mat-form-field>
+            <mat-label>Ordenar por:</mat-label>
+            <mat-select
+            (selectionChange)="index.setFieldtoSort($event)"
+            >
+                <mat-option 
+                *ngFor="let field of sort_fields"
+                [value]="field">
+                    {{field}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+    <div class="col s6 m3">
+        <mat-form-field>
+            <mat-label>Asc o Desc</mat-label>
+            <mat-select
+            (selectionChange)="index.setOrderSort($event)"
+            >
+                <mat-option value="asc">Ascendente</mat-option>
+                <mat-option value="desc">Descendete</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+    
+</div>
+<div class="row" *ngIf="compareOptions && sort_fields">
+    <div class="col s6 m3">
+        <mat-form-field>
+            <mat-label>Filtrar por:</mat-label>
+            <mat-select
+            (selectionChange)="index.setFieldtoSort($event)"
+            >
+                <mat-option 
+                *ngFor="let field of sort_fields"
+                [value]="field">
+                    {{field}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+    <div class="col s6 m3">
+        <mat-form-field>
+            <mat-label>donde</mat-label>
+            <mat-select
+            >
+                <mat-option value="==">Es igual</mat-option>
+                <mat-option value=">">Es mayor que</mat-option>
+                <mat-option value=">=">Es mayor o igual que</mat-option>
+                <mat-option value="<">Es menor que</mat-option>
+                <mat-option value="<=">Es menor o igual que</mat-option>
+                <mat-option value="array-contain">Contiene</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+    <div class="col s6 m3">
+        <mat-form-field>
+            <mat-label>Criterio</mat-label>
+            <input matInput type="text" name="cirterio" id="criterio">
+        </mat-form-field>
+    </div>
+</div>
+<div class="row" *ngIf="filterByField && fieldValues">
+    <div class="col s6 m3">
+        <mat-form-field>
+            <mat-label>Filtrar por:</mat-label>
+            <mat-select
+            (selectionChange)="index.setCriteriaFilter($event, filterByField, 'array-contains')"
+            >
+                <mat-option>--Nada--</mat-option>
+                <mat-option 
+                *ngFor="let criteria of fieldValues"
+                [value]="criteria">
+                    {{criteria}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+</div>

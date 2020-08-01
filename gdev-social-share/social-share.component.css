@@ -1,0 +1,33 @@
+.shareBtns .fab {
+    width: 10%;
+    font-size: 2em;
+    text-align: center;
+    padding: 0 1.2em 0 0;
+    cursor: pointer;
+}
+
+.shareBtns {
+    display: flex;
+    flex-flow: row !important;
+}
+
+.fa-facebook-square {
+    color: #3b5999;
+}
+
+.fa-whatsapp-square {
+    color: #25D366;
+}
+
+.fa-linkedin {
+    color: #0077B5;
+}
+
+.fa-twitter-square {
+    color: #55acee;
+}
+
+button {
+    border: none;
+    background: none;
+}

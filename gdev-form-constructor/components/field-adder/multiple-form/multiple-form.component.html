@@ -1,0 +1,32 @@
+<div class="col s12 input-field">
+    <div
+        class="opcion"
+        *ngFor="let opcion of opciones; index as i"
+    >
+        
+            <input
+                class="opcion-input"
+                onkeypress="this.style.width = ((this.value.length + 4) * 8) + 'px';"
+                type="text"
+                [name]="opcion.index"
+                [id]="opcion.index"
+                [value]="opcion.value"
+                (blur)="addOpcionValue(opcion.index, $event.target.value)"
+                (keydown.Tab)="addOpcionField()"
+            (keydown.enter)="addOpcionField()"
+            />
+            <span class="del-opcion" (click)="delOpcion(i)">
+                <i class="fas fa-times"></i>
+            </span>
+    </div>
+
+    
+        <input
+            class="opcion-nueva"
+            type="text"
+            name="opcion-nueva"
+            id="opcion-nueva"
+            (click)="addOpcionField()"
+            placeholder="Opción nueva"
+        />
+</div>

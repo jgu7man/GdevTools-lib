@@ -1,0 +1,31 @@
+<mat-form-field class="col" [ngClass]="main.ClearValues?'s11':'s12'" *ngIf="field">
+    <mat-label [matTooltip]="field.info"> {{ field.etiqueta }} </mat-label>
+    <input
+        matInput
+        [id]="fieldId"
+        [name]="fieldId"
+        type="number"
+        [ngClass]="{ 'active': field.placeholder }"
+        [formControl]="number"
+        [required]="field.requerido"
+        placeholder="{{ field.placeholder }}"
+        [min]="field.minCant"
+        [max]="field.maxCant"
+        (blur)="
+            getValue.emit({
+                key: field.etiqueta,
+                value: $event.target.value
+            })
+        "
+    />
+    <mat-error *ngIf="number.hasError('required')">{{error.getErrorMessage(field)}}</mat-error>
+</mat-form-field>
+
+<mat-chip
+    class="clear_value col s1"
+    [matTooltip]="'Elimina el atributo'"
+    *ngIf="main.ClearValues"
+    (click)="main.clearFieldValue.next(field.etiqueta)"
+>
+    <i class="fas fa-trash red-text"></i>
+</mat-chip>

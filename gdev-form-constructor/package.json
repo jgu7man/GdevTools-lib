@@ -1,0 +1,27 @@
+{
+  "name": "form-constructor",
+  "version": "1.0.2",
+  "description": "FEAN STACK System to build forms ",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jgu7man/gdev-form-constructor.git"
+  },
+  "keywords": [
+    "forms",
+    "constructor",
+    "form"
+  ],
+  "author": "GdevTools",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jgu7man/gdev-form-constructor/issues"
+  },
+  "homepage": "https://github.com/jgu7man/gdev-form-constructor#readme",
+  "devDependencies": {
+    "nouislider": "^14.1.1"
+  }
+}

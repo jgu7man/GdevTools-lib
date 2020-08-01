@@ -1,0 +1,18 @@
+<div class="pickerPosition"></div>
+
+<div class="col s12 input-field">
+    <input type="text" (change)="getDate()" class="datepicker" [name]="field.etiqueta" [value]="setValue()" [id]="field.etiqueta" [placeholder]="field.placeholder">
+    <label [ngClass]="{'active': field.placeholder}" [for]="field.etiqueta">
+        {{field.etiqueta}} 
+    </label>
+    <Gdev-info-box *ngIf="field.info" [data]="field"></Gdev-info-box>
+</div>
+
+<div class="col s1">
+    <mat-chip class="clear_value" 
+        [matTooltip]="'Elimina el atributo'"
+        *ngIf="main.ClearValues"
+        (click)="main.clearFieldValue.next(field.etiqueta)" >
+        <i class="fas fa-trash red-text"></i>
+    </mat-chip>
+</div>

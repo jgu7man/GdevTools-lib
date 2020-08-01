@@ -1,0 +1,46 @@
+<div class="container">
+    <div class="row">
+        <div class="col s12">
+            <h5>Facebook Messenger</h5>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col s12">
+            <mat-card>
+                <mat-card-title>Configuración</mat-card-title>
+                <mat-card-content>
+                    <p><b>Configura el chat:</b></p>
+                    <ol type="1">
+                        <li>
+                            Ingresa a tu página de facebook que quieras enlazar
+                            el chat
+                        </li>
+                        <li>Ve a la sección de <b>"Información"</b></li>
+                        <li>Busca el campo <b>'ID de página'</b></li>
+                        <li>Cópialo y pégalo en el siguiente campo</li>
+                    </ol>
+                    <mat-form-field>
+                        <mat-label>ID de página de Facebook</mat-label>
+                        <input matInput
+                            type="text"
+                            name="page_id"
+                            id="page_id"
+                            [(ngModel)]="messengerObject.page_id"
+                        />
+                    </mat-form-field>
+                </mat-card-content>
+                <mat-card-actions>
+                    <button
+                    class="light-blue darken-4"
+                        mat-raised-button
+                        (click)="
+                            _messenger.saveFacebookID(this.messengerObject)
+                        "
+                    >
+                        Guardar
+                    </button>
+                </mat-card-actions>
+            </mat-card>
+        </div>
+    </div>
+</div>

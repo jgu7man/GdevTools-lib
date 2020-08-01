@@ -1,0 +1,12 @@
+<div class="table-head">
+    <div class="row" *ngIf="_service.columns">
+        <ng-container *ngIf="_service.errorMsg; else elseTemplate">
+            {{_service.errorMsg}}
+        </ng-container>
+        <ng-template #elseTemplate>
+            <div *ngFor="let col of _service.columns" class="col s{{col.colspan}}">{{col.name}}</div>
+            <div *ngIf="_service.options" class="col s2 right {{_service.pushValue}}">Opciones</div>
+        </ng-template>
+
+    </div>
+</div>

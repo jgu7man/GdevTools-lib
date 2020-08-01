@@ -1,0 +1,12 @@
+<app-table-head></app-table-head>
+
+<ul id="table-body" class="collapsible"  *ngIf="_service.items">
+
+    <li *ngFor="let item of _service.items" [id]="item[_service.objectKeys.id]">
+
+        <app-collapsible-header [item]="item"></app-collapsible-header>
+        <app-collapsible-body [item]="item"></app-collapsible-body>
+
+    </li>
+
+</ul>

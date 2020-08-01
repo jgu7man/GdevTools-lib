@@ -1,0 +1,33 @@
+<div class="col s11">
+
+    <mat-form-field>
+        <mat-label> {{field.etiqueta}} </mat-label>
+        
+        <mat-select
+            [id]="fieldId"
+            [required]="field.requerido"
+            [value]="setValue()"
+            [matTooltip]="field.info"
+            (selectionChange)="
+            getValue.emit({
+                key: field.etiqueta,
+                value: $event.value
+            })"
+        >
+            <mat-option *ngFor="let item of field.opciones" [value]="item.value">
+                {{item.value}}
+            </mat-option>
+        </mat-select>
+        <!-- <mat-error *ngIf="field.info">{{getErrorMessage()}}</mat-error> -->
+    </mat-form-field>
+
+</div>
+
+<div class="col s1">
+    <mat-chip class="clear_value" 
+        [matTooltip]="'Elimina el atributo'"
+        *ngIf="main.ClearValues"
+        (click)="main.clearFieldValue.next(field.etiqueta)" >
+        <i class="fas fa-trash red-text"></i>
+    </mat-chip>
+</div>

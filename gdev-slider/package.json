@@ -1,0 +1,12 @@
+{
+  "name": "gdev-slider",
+  "version": "1.0.0",
+  "description": "a material slider tool",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "jgu7man",
+  "license": "MIT",
+  "dependencies": {}
+}

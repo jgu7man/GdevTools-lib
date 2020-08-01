@@ -1,0 +1,18 @@
+.fa-info-circle {
+    cursor: pointer;
+    transition: all .3s ease-in;
+}
+
+.info-pot {
+    position: absolute;
+}
+
+.info-box {
+    display: none;
+    font-size: 11px;
+    background: beige;
+    width: 200px;
+    padding: 1px 10px;
+    right: 180px;
+    position: relative;
+}

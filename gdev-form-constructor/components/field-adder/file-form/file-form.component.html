@@ -1,0 +1,11 @@
+<mat-form-field>
+    <mat-label>Llamado a la acción</mat-label>
+    <input
+        matInput
+        placeholder="Leyenda del botón"
+        (blur)="_adder.getAttr.next({ key:'llamadoAccion', value: $event.target.value})"
+    />
+</mat-form-field>
+<mat-slide-toggle (blur)="_adder.getAttr.next({ key:'multiple', value: $event.target.value})">
+    Multiple
+</mat-slide-toggle>
