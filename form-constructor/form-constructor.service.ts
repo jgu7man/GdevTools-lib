@@ -6,8 +6,8 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { FormModel } from './models/form.model';
 import * as firebase from 'firebase/app';
 import { Loading } from 'src/app/public/loading/loading.service';
-import { AlertaService } from 'src/app/gdev-tools/gdev-alerta_service/alertas.service';
-import { MensajeAlertaModel } from 'src/app/gdev-tools/gdev-alerta_service/alertas.model';
+import { AlertaService } from 'src/app/Gdev-Tools/gdev-alerta_service/alertas.service';
+import { MensajeAlertaModel } from 'src/app/Gdev-Tools/gdev-alerta_service/alertas.model';
 
 @Injectable({
   providedIn: 'root'

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { AlertaService } from '../gdev-alerta_service/alertas.service';
+import { AlertService } from '../alerts/alert.service';
 import { Location } from '@angular/common';
 
 @Injectable({
@@ -33,7 +33,7 @@ export class GdevSliderService {
 
   constructor (
     private fs: AngularFirestore,
-    private alertas: AlertaService,
+    private alertas: AlertService,
     private location: Location
   ) { 
     this.loadConfiguration()
@@ -71,7 +71,7 @@ export class GdevSliderService {
     try {
       const sliderRef = this.fs.collection( 'gdev-tools' ).ref.doc( 'slider' )
       await sliderRef.set( config, { merge: true } )
-      this.alertas.enviarMensajeAlerta( 'Se guardó la configuración' )
+      this.alertas.sendMessageAlert( 'Se guardó la configuración' )
       this.location.back()
       return
     } catch ( error ) {

@@ -1,4 +1,4 @@
-import { PwdToggleDirective } from './../gdev-login/directives/pwd-toggle.directive';
+import { PwdToggleDirective } from '../login/directives/pwd-toggle.directive';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CapitalizePipe } from './capitalize.pipe';

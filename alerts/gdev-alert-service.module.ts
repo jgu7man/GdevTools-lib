@@ -17,4 +17,4 @@ import { MaterialModule } from 'src/app/material.module';
     AlertaPopupComponent
   ]
 })
-export class GdevAlertaServiceModule { }
+export class GdevAlertServiceModule { }

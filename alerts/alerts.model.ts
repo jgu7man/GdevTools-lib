@@ -1,10 +1,10 @@
-export class MensajeAlertaModel {
+export class MessageAlertModel {
     constructor(
-        public mensaje: string,
+        public message: string,
         public type: 'mensaje' | 'pregunta',
-        public confirmacion?: boolean,
-        public trueMsj?: string,
-        public falseMsj?: string
+        public confirmation?: boolean,
+        public trueMsg?: string,
+        public falseMsg?: string
     ){}
 }
 

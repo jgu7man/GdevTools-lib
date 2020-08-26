@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { MensajeAlertaModel, PreguntaAlertaModel } from '../alertas.model';
+import { MessageAlertModel, PreguntaAlertaModel } from '../alerts.model';
 
 @Component({
   selector: 'gdev-alerta-popup',
@@ -11,7 +11,7 @@ export class AlertaPopupComponent implements OnInit {
 
   constructor (
     public dialog: MatDialogRef<AlertaPopupComponent>,
-    @Inject(MAT_DIALOG_DATA) public alerta: MensajeAlertaModel
+    @Inject(MAT_DIALOG_DATA) public alerta: MessageAlertModel
   ) {
    }
 

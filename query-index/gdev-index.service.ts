@@ -2,7 +2,7 @@ import { Injectable, Output, EventEmitter } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Subject } from 'rxjs';
 import { MatSelectChange } from '@angular/material/select';
-import { AlertaService } from '../gdev-alerta_service/alertas.service';
+import { AlertService } from '../alerts/alert.service';
 
 interface ANCHOR {
     page: number,
@@ -40,7 +40,7 @@ export class GdevIndexService {
     public fieldSort
     constructor(
         private fs: AngularFirestore,
-        private alerta: AlertaService
+        private alerta: AlertService
     ) { }
 
 
@@ -165,7 +165,7 @@ export class GdevIndexService {
             return true
         } catch (error) {
             console.error( error );
-            this.alerta.enviarMensajeAlerta('Ooops! Algo no salió bien')
+            this.alerta.sendMessageAlert('Ooops! Algo no salió bien')
         }
         this.loadingQuery.next( false )
     }
