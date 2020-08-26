@@ -6,6 +6,8 @@ import { CapitalizePipe } from './capitalize.pipe';
 import { GdevClassicEditorComponent } from './components/gdev-classic-editor/gdev-classic-editor.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CKEditorModule } from 'ckeditor4-angular';
+import { lowecaseDirective } from './directives/lowercase.directive';
+import { NormalizeDirective } from './directives/normalize.directive';
 
 
 
@@ -14,7 +16,9 @@ import { CKEditorModule } from 'ckeditor4-angular';
     CapitalizePipe,
     PwdToggleDirective,
     // CompareValidatorDirective,
-    GdevClassicEditorComponent
+    GdevClassicEditorComponent,
+    lowecaseDirective,
+    NormalizeDirective,
   ],
   imports: [
     CommonModule,
@@ -27,7 +31,8 @@ import { CKEditorModule } from 'ckeditor4-angular';
     PwdToggleDirective,
     // CompareValidatorDirective,
     GdevClassicEditorComponent,
-    CKEditorModule
+    lowecaseDirective,
+    NormalizeDirective,
   ]
 })
 export class GdevTextModule { }
