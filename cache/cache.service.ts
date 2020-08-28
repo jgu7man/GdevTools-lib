@@ -6,20 +6,21 @@ import { Observable } from 'rxjs';
 })
 export class CacheService {
 
+  cacheTagName: string = 'as-data'
   constructor () { }
   
   async updateData(key, value) {
     var sesData = {}
-    sesData = JSON.parse( sessionStorage.getItem( 'as-data' ) )
+    sesData = JSON.parse( sessionStorage.getItem( this.cacheTagName ) )
 
     if ( key && value ) {
 
       if ( sesData ) {
         sesData[ key ] = value
-        sessionStorage.setItem( 'as-data', JSON.stringify( sesData ) )
+        sessionStorage.setItem( this.cacheTagName, JSON.stringify( sesData ) )
       } else {
         sesData = { [ key ]: value }
-        sessionStorage.setItem( 'as-data', JSON.stringify( sesData ) )
+        sessionStorage.setItem( this.cacheTagName, JSON.stringify( sesData ) )
       }
 
     } 
@@ -31,7 +32,7 @@ export class CacheService {
   }
 
   async getDataKey(key:string) {
-    var sesData = JSON.parse( sessionStorage.getItem( 'as-data' ) )
+    var sesData = JSON.parse( sessionStorage.getItem( this.cacheTagName ) )
     if ( sesData ) {
       return sesData[key] ? sesData[key] : null
     } else {
