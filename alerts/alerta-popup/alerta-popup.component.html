@@ -3,16 +3,16 @@
 <mat-dialog-content>
         <div class="row">
             <div class="col s12 center">
-                <p class="white-text">{{alerta.mensaje}}</p>
+                <p class="white-text">{{alerta.message}}</p>
             </div>
         </div>
     </mat-dialog-content>
     <mat-dialog-actions style="display: flex; justify-content: space-around;">
         <div class="opcion center">
-            <button class="btn white black-text" [mat-dialog-close]="true">{{alerta.falseMsj}}</button>
+            <button class="btn white black-text" [mat-dialog-close]="true">{{alerta.falseMsg}}</button>
         </div>
         <div class="opcion center">
-            <button class="btn white black-text" [mat-dialog-close]="true">{{alerta.trueMsj}}</button>
+            <button class="btn white black-text" [mat-dialog-close]="true">{{alerta.trueMsg}}</button>
         </div>
     </mat-dialog-actions>
 </ng-template>
@@ -21,14 +21,14 @@
             
             <div class="row">
                 <div class="col s12 center">
-                    <p>{{alerta.mensaje}}</p>
+                    <p>{{alerta.message}}</p>
                 </div>
             </div>
         
         </mat-dialog-content>
         <mat-dialog-actions style="display: flex; justify-content: space-around;">
             <div class="col s12 center">
-                <button class="btn white black-text" (click)="dialog.close()">{{alerta.trueMsj}}</button>
+                <button class="btn white black-text" (click)="dialog.close()">{{alerta.trueMsg}}</button>
             </div>
         </mat-dialog-actions>
     </ng-template>
