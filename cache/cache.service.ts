@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
 })
 export class CacheService {
 
-  cacheTagName: string = 'as-data'
+  cacheTagName: string = 'gdev-data'
   constructor () { }
   
   async updateData(key, value) {
