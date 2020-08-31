@@ -28,7 +28,8 @@ export class CacheService {
   }
 
   async getFullData() {
-    
+    var sesData = JSON.parse( sessionStorage.getItem( this.cacheTagName ) )
+    return sesData ? sesData : null
   }
 
   async getDataKey(key:string) {
