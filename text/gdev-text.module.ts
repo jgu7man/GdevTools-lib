@@ -8,6 +8,9 @@ import { CKEditorModule } from 'ckeditor4-angular';
 import { lowecaseDirective } from './directives/lowercase.directive';
 import { NormalizeDirective } from './directives/normalize.directive';
 import { PwdToggleDirective } from '../gdev-login/directives/pwd-toggle.directive';
+import { GdevReacvtiveDialogboxComponent } from './components/gdev-reacvtive-dialogbox/gdev-reacvtive-dialogbox.component';
+import { MaterialModule } from 'src/app/material.module';
+import { PreventSpacesDirective } from './directives/prevent-spaces.directive';
 
 
 
@@ -19,12 +22,15 @@ import { PwdToggleDirective } from '../gdev-login/directives/pwd-toggle.directiv
     GdevClassicEditorComponent,
     lowecaseDirective,
     NormalizeDirective,
+    GdevReacvtiveDialogboxComponent,
+    PreventSpacesDirective,
   ],
   imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    CKEditorModule
+    CKEditorModule,
+    MaterialModule
   ],
   exports: [
     CapitalizePipe,
@@ -33,6 +39,8 @@ import { PwdToggleDirective } from '../gdev-login/directives/pwd-toggle.directiv
     GdevClassicEditorComponent,
     lowecaseDirective,
     NormalizeDirective,
+    GdevReacvtiveDialogboxComponent,
+    PreventSpacesDirective,
   ]
 })
 export class GdevTextModule { }

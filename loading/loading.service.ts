@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Subject, Observable, Observer } from 'rxjs';
 import { Router, ActivatedRoute, Params, NavigationEnd } from '@angular/router';
-import { filter, map, switchMap } from 'rxjs/operators';
+import { filter, map, switchMap, first } from 'rxjs/operators';
 
 @Injectable( { providedIn: 'root' } )
 export class Loading {
@@ -62,9 +62,12 @@ export class Loading {
                 return route;
             } ),
             filter( route => route.outlet === 'primary' )
-        ).pipe( switchMap( ( route: ActivatedRoute ) => {
+        ).pipe(
+            switchMap( ( route: ActivatedRoute ) => {
             return route.params
-        }))
+            } ),
+            first()
+        )
     }
 
     getRouteQueryParams(): Observable<Params> {
@@ -80,7 +83,8 @@ export class Loading {
             filter( route => route.outlet === 'primary' )
         ).pipe( switchMap( ( route: ActivatedRoute ) => {
             return route.queryParams
-        } ) )
+        } ), first()
+        )
     }
 
     
