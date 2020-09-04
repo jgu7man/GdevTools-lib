@@ -10,6 +10,7 @@ import { NormalizeDirective } from './directives/normalize.directive';
 import { PwdToggleDirective } from '../gdev-login/directives/pwd-toggle.directive';
 import { GdevReacvtiveDialogboxComponent } from './components/gdev-reacvtive-dialogbox/gdev-reacvtive-dialogbox.component';
 import { MaterialModule } from 'src/app/material.module';
+import { PreventSpacesDirective } from './directives/prevent-spaces.directive';
 
 
 
@@ -22,6 +23,7 @@ import { MaterialModule } from 'src/app/material.module';
     lowecaseDirective,
     NormalizeDirective,
     GdevReacvtiveDialogboxComponent,
+    PreventSpacesDirective,
   ],
   imports: [
     CommonModule,
@@ -38,6 +40,7 @@ import { MaterialModule } from 'src/app/material.module';
     lowecaseDirective,
     NormalizeDirective,
     GdevReacvtiveDialogboxComponent,
+    PreventSpacesDirective,
   ]
 })
 export class GdevTextModule { }
