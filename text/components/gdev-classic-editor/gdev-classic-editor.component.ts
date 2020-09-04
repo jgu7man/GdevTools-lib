@@ -1,5 +1,8 @@
 import { BehaviorSubject } from 'rxjs';
 import { Component, OnInit, ViewChild, Output, EventEmitter, Input, Inject, PLATFORM_ID } from '@angular/core';
+import * as CKSource from '../../ckeditor/build/cksource';
+
+const ClassicEditor = CKSource.ClassicEditor;
 
 import { isPlatformBrowser, isPlatformServer } from '@angular/common';
 // import { WINDOW } from '@ng-toolkit/universal';
@@ -11,7 +14,7 @@ import { isPlatformBrowser, isPlatformServer } from '@angular/common';
 })
 export class GdevClassicEditorComponent implements OnInit {
 
-  public Editor
+  public Editor = ClassicEditor;
   _content: BehaviorSubject<string> = new BehaviorSubject( '<p>Escribe algo...</p>')
   @Input() set content( content: string ) { this._content.next( content ) }
   get content() { return this._content.getValue() }

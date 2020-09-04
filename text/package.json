@@ -1,15 +1,90 @@
 {
   "name": "gdev-text",
-  "version": "1.0.0",
+  "version": "1.2.0",
   "description": "A module that manage all text fetures of gdev-tools",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build-ckeditor": "cd ckeditor && webpack --mode production"
   },
   "author": "jgu7man",
   "license": "MIT",
   "dependencies": {
-    "@ng-toolkit/universal": "^8.1.0",
-    "ckeditor4-angular": "^1.2.2"
+    "@ng-toolkit/universal": "^8.1.0"
+  },
+  "peerDependencies": {
+    "@angular/core": ">=5.0.0",
+    "@angular/common": ">=5.0.0",
+    "@angular/forms": ">=5.0.0"
+  },
+  "devDependencies": {
+    "@ckeditor/ckeditor5-dev-env": "^23.5.1",
+    "@ckeditor/ckeditor5-dev-utils": "^23.5.1",
+    "@ckeditor/ckeditor5-dev-webpack-plugin": "^23.5.1",
+    "@ckeditor/ckeditor-cloud-services-core": "^22.0.0",
+    "@ckeditor/ckeditor5-adapter-ckfinder": "^22.0.0",
+    "@ckeditor/ckeditor5-alignment": "^22.0.0",
+    "@ckeditor/ckeditor5-autoformat": "^22.0.0",
+    "@ckeditor/ckeditor5-autosave": "^22.0.0",
+    "@ckeditor/ckeditor5-basic-styles": "^22.0.0",
+    "@ckeditor/ckeditor5-block-quote": "^22.0.0",
+    "@ckeditor/ckeditor5-build-balloon": "^22.0.0",
+    "@ckeditor/ckeditor5-build-balloon-block": "^22.0.0",
+    "@ckeditor/ckeditor5-build-classic": "^22.0.0",
+    "@ckeditor/ckeditor5-build-decoupled-document": "^22.0.0",
+    "@ckeditor/ckeditor5-build-inline": "^22.0.0",
+    "@ckeditor/ckeditor5-ckfinder": "^22.0.0",
+    "@ckeditor/ckeditor5-clipboard": "^22.0.0",
+    "@ckeditor/ckeditor5-cloud-services": "^22.0.0",
+    "@ckeditor/ckeditor5-code-block": "^22.0.0",
+    "@ckeditor/ckeditor5-core": "^22.0.0",
+    "@ckeditor/ckeditor5-easy-image": "^22.0.0",
+    "@ckeditor/ckeditor5-editor-balloon": "^22.0.0",
+    "@ckeditor/ckeditor5-editor-classic": "^22.0.0",
+    "@ckeditor/ckeditor5-editor-decoupled": "^22.0.0",
+    "@ckeditor/ckeditor5-editor-inline": "^22.0.0",
+    "@ckeditor/ckeditor5-engine": "^22.0.0",
+    "@ckeditor/ckeditor5-enter": "^22.0.0",
+    "@ckeditor/ckeditor5-essentials": "^22.0.0",
+    "@ckeditor/ckeditor5-font": "^22.0.0",
+    "@ckeditor/ckeditor5-heading": "^22.0.0",
+    "@ckeditor/ckeditor5-highlight": "^22.0.0",
+    "@ckeditor/ckeditor5-horizontal-line": "^22.0.0",
+    "@ckeditor/ckeditor5-image": "^22.0.0",
+    "@ckeditor/ckeditor5-indent": "^22.0.0",
+    "@ckeditor/ckeditor5-link": "^22.0.0",
+    "@ckeditor/ckeditor5-list": "^22.0.0",
+    "@ckeditor/ckeditor5-markdown-gfm": "^22.0.0",
+    "@ckeditor/ckeditor5-media-embed": "^22.0.0",
+    "@ckeditor/ckeditor5-mention": "^22.0.0",
+    "@ckeditor/ckeditor5-page-break": "^22.0.0",
+    "@ckeditor/ckeditor5-paragraph": "^22.0.0",
+    "@ckeditor/ckeditor5-paste-from-office": "^22.0.0",
+    "@ckeditor/ckeditor5-remove-format": "^22.0.0",
+    "@ckeditor/ckeditor5-restricted-editing": "^22.0.0",
+    "@ckeditor/ckeditor5-select-all": "^22.0.0",
+    "@ckeditor/ckeditor5-special-characters": "^22.0.0",
+    "@ckeditor/ckeditor5-table": "^22.0.0",
+    "@ckeditor/ckeditor5-theme-lark": "^22.0.0",
+    "@ckeditor/ckeditor5-typing": "^22.0.0",
+    "@ckeditor/ckeditor5-ui": "^22.0.0",
+    "@ckeditor/ckeditor5-undo": "^22.0.0",
+    "@ckeditor/ckeditor5-upload": "^22.0.0",
+    "@ckeditor/ckeditor5-utils": "^22.0.0",
+    "@ckeditor/ckeditor5-watchdog": "^22.0.0",
+    "@ckeditor/ckeditor5-widget": "^22.0.0",
+    "@ckeditor/ckeditor5-word-count": "^22.0.0",
+    "typescript": "~3.5.3",
+    "webpack": "^4.41.6",
+    "webpack-cli": "^3.3.11"
+  },
+  "ngPackage": {
+    "lib": {
+      "entryFile": "./index.ts"
+    },
+    "whitelistedNonPeerDependencies": [
+      "."
+    ],
+    "dest": "../../dist"
   }
 }

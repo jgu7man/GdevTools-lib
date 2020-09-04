@@ -1,7 +1,8 @@
 <ckeditor 
 id="content"
 name="content"
-[(ngModel)]="Content"  
+[(ngModel)]="Content"
+[editor]="Editor"
 (change)="onBlurEditor($event)"
 >
 </ckeditor>
