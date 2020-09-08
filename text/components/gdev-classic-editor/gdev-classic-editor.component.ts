@@ -29,6 +29,12 @@ export class GdevClassicEditorComponent implements OnInit {
     
   }
 
+  config = {
+    extraPlugins: [
+      // this._upload.uploadImage
+    ],
+  }
+
   ngOnInit(): void {
     this._content.subscribe( content => {
       this.Content = content
