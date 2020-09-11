@@ -6,8 +6,8 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { FormModel } from './models/form.model';
 import * as firebase from 'firebase/app';
 import { Loading } from 'src/app/public/loading/loading.service';
-import { AlertaService } from 'src/app/Gdev-Tools/gdev-alerta_service/alertas.service';
-import { MensajeAlertaModel } from 'src/app/Gdev-Tools/gdev-alerta_service/alertas.model';
+import { AlertService } from 'src/app/Gdev-Tools/alerts/alert.service';
+import { MessageAlertModel } from 'src/app/Gdev-Tools/alerts/alerts.model';
 
 @Injectable({
   providedIn: 'root'
@@ -38,7 +38,7 @@ export class FormConstructorService {
   constructor(
     private fs: AngularFirestore,
     private _loading: Loading,
-    private _alertas: AlertaService
+    private _alertas: AlertService
   ) {
    }
 
@@ -130,7 +130,7 @@ export class FormConstructorService {
 
           const fieldRef = formRef.collection( 'fields' )
           if ( field.ID == 'nuevo_campo' || field.etiqueta == 'Nuevo Campo' ){
-            this._alertas.enviarMensajeAlerta( 'El campo nuevo no puede llamarse "Campo Nuevo". Elige otro nombre' );
+            this._alertas.sendMessageAlert( 'El campo nuevo no puede llamarse "Campo Nuevo". Elige otro nombre' );
             return false
           }
           
@@ -164,7 +164,7 @@ export class FormConstructorService {
           return
         } catch ( error ) {
           console.error(error);
-          this._alertas.enviarMensajeAlerta( 'Error al guardar '+ field.etiqueta )
+          this._alertas.sendMessageAlert( 'Error al guardar '+ field.etiqueta )
         }
         
       })
@@ -175,7 +175,7 @@ export class FormConstructorService {
       
     } catch ( error ) {
       console.error(error);
-      this._alertas.enviarMensajeAlerta( 'Ups! Algo salió mal')
+      this._alertas.sendMessageAlert( 'Ups! Algo salió mal')
     }
 
   }

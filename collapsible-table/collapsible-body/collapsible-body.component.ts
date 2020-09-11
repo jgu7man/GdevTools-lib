@@ -1,4 +1,4 @@
-import { FormConstructorService } from 'src/app/Gdev-Tools/gdev-form-constructor/form-constructor.service';
+import { FormConstructorService } from 'src/app/Gdev-Tools/form-constructor/form-constructor.service';
 import { Component, OnInit, Input } from '@angular/core';
 import { CollapsibleTableService } from '../collapsible-table.service';
 import { BehaviorSubject } from 'rxjs';
