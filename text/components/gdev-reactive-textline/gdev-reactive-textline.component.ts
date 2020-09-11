@@ -1,21 +1,18 @@
-import { Component, OnInit, ViewChild, ElementRef, AfterViewInit, OnDestroy, Output, EventEmitter, Input } from '@angular/core';
+import { Component,  AfterViewInit, OnDestroy, Input, ViewChild, ElementRef, Output, EventEmitter } from '@angular/core';
 import { Subscription, fromEvent } from 'rxjs';
-import { pluck } from 'rxjs/operators';
-import { debounceTime } from 'rxjs/operators';
-import { distinctUntilChanged } from 'rxjs/operators';
-import { startWith } from 'rxjs/operators';
+import { pluck, startWith, debounceTime, distinctUntilChanged } from 'rxjs/operators';
 
 @Component({
-  selector: '  gdev-reacvtive-dialogbox',
-  templateUrl: './gdev-reacvtive-dialogbox.component.html',
-  styleUrls: ['./gdev-reacvtive-dialogbox.component.scss']
+  selector: 'gdev-reactive-textline',
+  templateUrl: './gdev-reactive-textline.component.html',
+  styleUrls: ['./gdev-reactive-textline.component.scss']
 })
-export class GdevReacvtiveDialogboxComponent implements AfterViewInit, OnDestroy {
+export class GdevReactiveTextlineComponent implements AfterViewInit, OnDestroy {
 
   @Input() text: string
   @Input() label: string
   textSub: Subscription
-  @ViewChild( 'dialgbox' ) mensajeInput: ElementRef
+  @ViewChild( 'textLine' ) mensajeInput: ElementRef
   @Output() onTextEvent: EventEmitter<string> = new EventEmitter()
 
   constructor() { }
@@ -27,7 +24,7 @@ export class GdevReacvtiveDialogboxComponent implements AfterViewInit, OnDestroy
   listenText() {
     this.textSub = fromEvent<KeyboardEvent>( this.mensajeInput.nativeElement, 'keyup' ).pipe(
       pluck<KeyboardEvent, string>( 'target', 'value' ),
-      startWith(this.text ? this.text : ''),
+      startWith( this.text ? this.text : '' ),
       debounceTime( 500 ),
       distinctUntilChanged()
     )
@@ -36,10 +33,9 @@ export class GdevReacvtiveDialogboxComponent implements AfterViewInit, OnDestroy
         this.text = text
         this.onTextEvent.emit( this.text )
       } )
-  }  
+  }
 
   ngOnDestroy() {
     this.textSub.unsubscribe()
   }
-
 }

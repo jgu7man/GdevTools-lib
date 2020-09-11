@@ -11,6 +11,7 @@ import { PwdToggleDirective } from '../gdev-login/directives/pwd-toggle.directiv
 import { GdevReacvtiveDialogboxComponent } from './components/gdev-reacvtive-dialogbox/gdev-reacvtive-dialogbox.component';
 import { MaterialModule } from 'src/app/material.module';
 import { PreventSpacesDirective } from './directives/prevent-spaces.directive';
+import { GdevReactiveTextlineComponent } from './components/gdev-reactive-textline/gdev-reactive-textline.component';
 
 
 
@@ -24,6 +25,7 @@ import { PreventSpacesDirective } from './directives/prevent-spaces.directive';
     NormalizeDirective,
     GdevReacvtiveDialogboxComponent,
     PreventSpacesDirective,
+    GdevReactiveTextlineComponent,
   ],
   imports: [
     CommonModule,
@@ -41,6 +43,7 @@ import { PreventSpacesDirective } from './directives/prevent-spaces.directive';
     NormalizeDirective,
     GdevReacvtiveDialogboxComponent,
     PreventSpacesDirective,
+    GdevReactiveTextlineComponent,
   ]
 })
 export class GdevTextModule { }

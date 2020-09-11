@@ -1,0 +1,13 @@
+<mat-form-field>
+    <mat-label *ngIf="label">
+        {{label}}
+    </mat-label>
+    <input 
+    matInput
+    class="text_line"
+    #textLine
+    [(ngModel)]="text"
+    type="text" 
+    name="textLine"
+    >
+</mat-form-field>
