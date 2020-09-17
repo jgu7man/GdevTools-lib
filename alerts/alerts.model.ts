@@ -15,3 +15,10 @@ export class PreguntaAlertaModel {
         public respFalse?: string
     ){}
 }
+
+export class ErrorAlertModel {
+    constructor (
+        public mensaje: string,
+        public systemError: string  
+    ){}
+}

@@ -1,10 +1,12 @@
 import { Injectable } from "@angular/core";
 import { Subject, Observable } from 'rxjs';
-import { MessageAlertModel, PreguntaAlertaModel } from './alerts.model';
+import { ErrorAlertModel, MessageAlertModel, PreguntaAlertaModel } from './alerts.model';
 import { MatDialog } from '@angular/material/dialog';
 import { AlertaPopupComponent } from './alerta-popup/alerta-popup.component';
 import { MatSnackBar, MatSnackBarConfig, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 import { config } from 'process';
+import { ErrorPopupComponent } from './error-popup/error-popup.component';
+import { AngularFirestore } from '@angular/fire/firestore';
 
 
 @Injectable({ providedIn: 'root' })
@@ -12,13 +14,15 @@ export class AlertService {
     
     messageAlert$ = new Subject<MessageAlertModel>()
     requestAlert$ = new Subject<MessageAlertModel>()
+    errorAlert$ = new Subject<ErrorAlertModel>()
     responseAlert$ = new Subject<boolean>()
 
     
 
     constructor (
         private dialog: MatDialog,
-        private snack: MatSnackBar
+        private snack: MatSnackBar,
+        private fs: AngularFirestore
     ) { }
 
     // Función que envía un mensaje de alerta
@@ -75,6 +79,15 @@ export class AlertService {
         }
 
         this.snack.open( notification, confirmText, config)
+    }
+
+
+    sendError( mensaje: string, error: string ) {
+        const alert = new ErrorAlertModel(mensaje, error)
+        this.dialog.open( ErrorPopupComponent, {
+            width: '400px',
+            data: alert
+        } )
     }
     
     
