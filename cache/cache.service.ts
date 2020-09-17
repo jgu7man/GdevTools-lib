@@ -9,7 +9,7 @@ export class CacheService {
   cacheTagName: string = 'gdev-data'
   constructor () { }
   
-  async updateData(key, value) {
+  updateData(key, value) {
     var sesData = {}
     sesData = JSON.parse( sessionStorage.getItem( this.cacheTagName ) )
 
@@ -32,7 +32,7 @@ export class CacheService {
     return sesData ? sesData : null
   }
 
-  async getDataKey(key:string) {
+  getDataKey(key:string) {
     var sesData = JSON.parse( sessionStorage.getItem( this.cacheTagName ) )
     if ( sesData ) {
       return sesData[key] ? sesData[key] : null
