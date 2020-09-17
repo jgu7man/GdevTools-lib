@@ -3,15 +3,23 @@ import { CommonModule } from '@angular/common';
 import { MaterialModule } from 'src/app/material.module';
 import { IndexCallerComponent } from './index-caller/index-caller.component';
 import { SortOptionsComponent } from './sort-options/sort-options.component';
+import { SortPipe } from './sort.pipe';
 
 
 
 @NgModule({
-  declarations: [IndexCallerComponent, SortOptionsComponent],
+  declarations: [
+    IndexCallerComponent,
+    SortOptionsComponent,
+    SortPipe
+  ],
   imports: [
     CommonModule,
     MaterialModule
   ],
-  exports: [IndexCallerComponent, SortOptionsComponent]
+  exports: [
+    IndexCallerComponent,
+    SortOptionsComponent
+  ]
 })
 export class GdevIndexModule { }
