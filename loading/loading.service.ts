@@ -1,7 +1,8 @@
 import { Injectable } from "@angular/core";
-import { Subject, Observable, Observer } from 'rxjs';
+import { Subject, Observable, Observer, BehaviorSubject, Subscription } from 'rxjs';
 import { Router, ActivatedRoute, Params, NavigationEnd } from '@angular/router';
 import { filter, map, switchMap, first } from 'rxjs/operators';
+import { promise } from 'protractor';
 
 @Injectable( { providedIn: 'root' } )
 export class Loading {
@@ -36,6 +37,36 @@ export class Loading {
         }
     }
 
+
+    
+    async waitForDataLoaded(
+        ObservableElement: Subject<any> | BehaviorSubject<any>,
+        autoUnsubscribe?: boolean
+    ): Promise<DataLoaded>
+    {
+        var data: any
+        var dataSubscription: Subscription
+        
+        // Set subscription
+        var promise = new Promise( resolve => {
+            dataSubscription =
+                ObservableElement.subscribe( d => resolve( d ) )
+        } )
+        
+        // Get the data
+        data = await promise
+
+        // Unsubscribe
+        if ( autoUnsubscribe ) {
+            promise.finally(() => dataSubscription.unsubscribe())
+        }
+
+        
+        return {
+            data,
+            dataSubscription: autoUnsubscribe ? null: dataSubscription
+        }
+    }
 
     getCurrentActivatedRoute(): Observable<ActivatedRoute> {
         return this.router.events.pipe(
@@ -91,3 +122,8 @@ export class Loading {
 
 
 }
+
+interface DataLoaded {
+    data: any,
+    dataSubscription?: Subscription
+ }
