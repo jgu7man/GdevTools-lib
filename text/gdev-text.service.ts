@@ -23,8 +23,6 @@ export class TextService {
                     ret.push( c );
             }
             return ret.join( '' );
-        
-
     }
 
     capitalize( text: string, lower = false ) {
@@ -55,6 +53,11 @@ export class TextService {
                 return 'nueve'
 
         }
+    }
+
+    generateRandomText(digits?: number) {
+        return Math.random().toString( 36 )
+            .substring( digits ? digits : 6 );
     }
 
 }
