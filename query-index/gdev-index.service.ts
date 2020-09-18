@@ -105,25 +105,29 @@ export class GdevIndexService {
         var query = await queryCollection.limit(this.queryCant).get()
         
         this.pageContent = []
-        await query.forEach( async doc => {
-            let prod = doc.data()
-            prod[ 'id' ] = doc.id
-            return this.pageContent.push( prod )
-        } )
-        this.dataIndexed.emit( {
-            firstIndex: this.first,
-            lastIndex: this.last,
-            collectionSize: this.collectionSize
-        })
-        this.queryData.next(this.pageContent)
+        if ( this.collectionSize > 0 ) {
+            await query.forEach( async doc => {
+                let prod = doc.data()
+                prod[ 'id' ] = doc.id
+                return this.pageContent.push( prod )
+            } )
+            this.dataIndexed.emit( {
+                firstIndex: this.first,
+                lastIndex: this.last,
+                collectionSize: this.collectionSize
+            } )
+            this.queryData.next( this.pageContent )
+
+
+            // Define anchors
+            this.pageAnchors.push( {
+                page: this.first,
+                firstQuery: this.pageContent[ 0 ][ this.field ],
+                lastQuery: this.pageContent[ this.queryCant - 1 ][ this.field ]
+            } )
+        }
         
-        
-        // Define anchors
-        this.pageAnchors.push({
-          page: this.first,
-          firstQuery: this.pageContent[0][this.field],
-          lastQuery: this.pageContent[this.queryCant-1][this.field]
-        } )
+        this.queryData.next( this.pageContent )
         this.loadingQuery.next( false )
     }
 
