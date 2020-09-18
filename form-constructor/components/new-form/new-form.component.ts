@@ -1,13 +1,13 @@
 import { Component, OnInit, ViewEncapsulation, Input} from '@angular/core';
 import { FieldModel } from '../field-adder/field.model';
 import { FieldAdderService } from '../field-adder/field-adder.service';
-import { Loading } from 'src/app/public/loading/loading.service';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { FormConstructorService } from '../../form-constructor.service';
 import { FormModel } from '../../models/form.model';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { FieldTYPE, FieldTypes } from '../field-adder/field.types.model';
 import { BehaviorSubject } from 'rxjs';
+import { Loading } from '../../../loading/loading.service';
 
 
 

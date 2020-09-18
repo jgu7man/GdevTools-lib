@@ -5,9 +5,9 @@ import { FieldModel } from './components/field-adder/field.model';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { FormModel } from './models/form.model';
 import * as firebase from 'firebase/app';
-import { Loading } from 'src/app/public/loading/loading.service';
 import { AlertService } from 'src/app/Gdev-Tools/alerts/alert.service';
 import { MessageAlertModel } from 'src/app/Gdev-Tools/alerts/alerts.model';
+import { Loading } from '../loading/loading.service';
 
 @Injectable({
   providedIn: 'root'
