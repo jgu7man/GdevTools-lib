@@ -14,6 +14,7 @@ import { auth } from 'firebase/app';
 export class LoginService {
 
   user$: Observable<any>
+  unloggedPath: string = ''
 
   constructor (
     private afAuth: AngularFireAuth,
@@ -42,7 +43,7 @@ export class LoginService {
       var user2 
         this.user$.pipe().subscribe( u => user2 = u)
       if ( !user2 ) {
-        this.router.navigate( [ '/' ], { queryParams: { logged: false } } )
+        this.router.navigate( [ `/${this.unloggedPath}` ], { queryParams: { logged: false } } )
       } else {
         this._cache.updateData( 'user', user2 )
       }
