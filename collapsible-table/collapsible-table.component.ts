@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { CollapsibleTableService } from './collapsible-table.service';
-import { Loading } from 'src/app/public/loading/loading.service';
+import { Loading } from '../loading/loading.service';
+declare var $: any
 
 @Component({
   selector: 'app-collapsible-table',
