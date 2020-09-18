@@ -1,0 +1,31 @@
+<mat-toolbar gdev-color [color]="'white'" [background]="'primary'" id="navbar">
+    <span class="hide-on-large-only mobile-menu" (click)="navbarService.toggleMobileMenu.emit()">
+        <i class="fas fa-bars"></i> 
+    </span>
+    
+    <span>{{appTitle}}</span>
+    
+    <span class="espacio"></span>
+    
+    <div class="col right user-profile" *ngIf="user; else unlogged">
+        
+        <button mat-icon-button
+        [matMenuTriggerFor]="menuProfile"
+        ><i class="fas fa-chevron-circle-down"></i></button>
+        <mat-menu #menuProfile="matMenu">
+            <button mat-menu-item [routerLink]="['/perfil']">Ver perfil</button>
+            <button mat-menu-item [routerLink]="['/consultorio']">Consultorio</button>
+            <button mat-menu-item>Cerrar sesión</button>
+        </mat-menu>
+        
+        <div class="imgProfileContainer">
+            <img src="{{user.photoURL}}" alt="">
+        </div>
+
+        <p class="userName"> {{user.displayName}} </p>
+    </div>
+    
+    <ng-template #unlogged>
+        <gdev-login-button (isLogged)="user = $event"></gdev-login-button>
+    </ng-template>
+</mat-toolbar>
