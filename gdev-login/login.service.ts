@@ -75,6 +75,24 @@ export class LoginService {
     return this.updateUserData( credential.user )
   }
 
+  async passwordLogin( email, pwd ) {
+    try {
+      var credential = await this.afAuth.signInWithEmailAndPassword( email, pwd )
+      return this.updateUserData( credential.user )
+    } catch ( error ) {
+      console.log( error )
+      if ( error.code.includes( 'not-found' ) ) {
+        alert( 'No se encontró el email' )
+      }
+      if ( error.code.includes( 'invalid' ) ) {
+        alert( 'Escribe una direccion de correo válida' )
+      }
+      if ( error.code.includes( 'wrong-password' ) ) {
+        alert( 'Contraseña incorrecta' )
+      }
+    }
+  }
+
   private async updateUserData( { uid, email, displayName, photoURL }: UserInterface ) {
     // Buscar el usuario en la base de datos de firebase
     const userRef: AngularFirestoreDocument<UserInterface> = this.afs.doc( `users/${ uid }` );
