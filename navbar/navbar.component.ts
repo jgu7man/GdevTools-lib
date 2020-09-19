@@ -12,6 +12,8 @@ export class NavbarComponent implements OnInit {
 
   @Input() appTitle: string
   @Input() unloggedPath: string
+  @Input() menuStructure: NavbarMenuNode[] = [
+  ]
 
   user: UserInterface
   constructor(
@@ -22,7 +24,11 @@ export class NavbarComponent implements OnInit {
   async ngOnInit() {
     if(this.unloggedPath) this.login.unloggedPath = this.unloggedPath
     this.user = await this.login.getCurrentUser()
-    console.log('hola');
   }
 
+}
+
+export interface NavbarMenuNode {
+  name: string,
+  route:string
 }

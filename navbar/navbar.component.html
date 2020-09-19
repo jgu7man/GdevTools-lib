@@ -13,9 +13,15 @@
         [matMenuTriggerFor]="menuProfile"
         ><i class="fas fa-chevron-circle-down"></i></button>
         <mat-menu #menuProfile="matMenu">
-            <button mat-menu-item [routerLink]="['/perfil']">Ver perfil</button>
-            <button mat-menu-item [routerLink]="['/consultorio']">Consultorio</button>
-            <button mat-menu-item>Cerrar sesión</button>
+            <button 
+            mat-menu-item 
+            *ngFor="let item of menuStructure"
+            [routerLink]="[item.route]"
+            >{{item.name}}</button>
+            
+            <button mat-menu-item 
+            (click)="login.singOut()"
+            >Cerrar sesión</button>
         </mat-menu>
         
         <div class="imgProfileContainer">
