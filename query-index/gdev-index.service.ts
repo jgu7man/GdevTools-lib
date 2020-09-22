@@ -123,7 +123,9 @@ export class GdevIndexService {
             this.pageAnchors.push( {
                 page: this.first,
                 firstQuery: this.pageContent[ 0 ][ this.field ],
-                lastQuery: this.pageContent[ this.queryCant - 1 ][ this.field ]
+                lastQuery: this.collectionSize > this.queryCant
+                    ? this.pageContent[ this.queryCant - 1 ][ this.field ]
+                    : this.pageContent[ this.collectionSize -1 ][this.field]
             } )
         }
         
