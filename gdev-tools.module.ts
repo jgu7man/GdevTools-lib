@@ -15,6 +15,7 @@ import { GdevTextModule } from './text/gdev-text.module';
 import { GdevNavbarModule } from './navbar/navbar.module';
 import { GdevSidenavModule } from './sidenav/sidenav.module';
 import { ColorThemeModule } from './color/color-theme.module';
+import { AdvanceFieldsModule } from './advance-fields/advance-fields.module';
 
 
 
@@ -37,7 +38,8 @@ import { ColorThemeModule } from './color/color-theme.module';
     GdevTestpageModule,
     GdevTextModule,
     GdevNavbarModule,
-    GdevSidenavModule
+    GdevSidenavModule,
+    AdvanceFieldsModule
   ],
   exports: [
     CommonModule,
@@ -56,7 +58,7 @@ import { ColorThemeModule } from './color/color-theme.module';
     GdevTextModule,
     GdevNavbarModule,
     GdevSidenavModule,
-    
+    AdvanceFieldsModule,
   ]
 })
 export class GdevToolsModule { }
