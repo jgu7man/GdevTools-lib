@@ -3,6 +3,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AlertService } from '../alerts/alert.service';
 import { Location } from '@angular/common';
+import { AngularFireStorage } from '@angular/fire/storage';
 
 @Injectable({
   providedIn: 'root'
@@ -29,26 +30,40 @@ export class GdevSliderService {
   }
 
   $sliderConfig: BehaviorSubject<SliderConfig> = new BehaviorSubject(this.sliderConfig)
-  
+  slides$: Observable<any> = new Observable()
 
   constructor (
     private fs: AngularFirestore,
+    private storage: AngularFireStorage,
     private alertas: AlertService,
     private location: Location
   ) { 
     this.loadConfiguration()
+    this.getSlidesList()
+  }
+
+  async addSlide( slide: Slide ) {
+    const slidesRef = this.fs.collection( 'gdev-tools/slider/slides' )
+    var nuSlide = await slidesRef.add( slide )
+    slidesRef.doc(nuSlide.id).update({id: nuSlide.id})
+    return 
+  }
+
+  async getSlidesList() {
+    this.slides$ = this.fs.collection( 'gdev-tools/slider/slides' )
+    .valueChanges()
   }
 
 
   async loadSlides() {
     try {
-      const sliderRef = this.fs.collection( 'gdev-tools' ).ref.doc( 'slider' ).collection( 'slides' )
+      const sliderRef = this.fs.collection( 'gdev-tools/slider/slides' ).ref
+        .where('activado','==', true)
       const slidesDocs = await sliderRef.get()
-      const slides: Slide[] = []
+      const slides: any[] = []
 
       slidesDocs.forEach( slide => {
-        let Slide: Slide = slide.data() as Slide
-        if ( Slide.activado ) slides.push( Slide );
+        slides.push(slide.data() as Slide)
       } )
 
       return slides
@@ -56,6 +71,21 @@ export class GdevSliderService {
       console.error
       return []
     }
+  }
+
+  async updateSlide( slide: Slide ) {
+    const slidesRef = this.fs.collection( 'gdev-tools/slider/slides' ).ref
+    slidesRef.doc( slide.id ).update( slide )
+    this.alertas.sendFloatNotification('Slide modificada')
+    return
+  }
+
+
+  async deleteSlide( slide: Slide ) {
+    await this.fs.collection( 'gdev-tools/slider/slides' ).ref
+      .doc( slide.id ).delete()
+    await this.storage.storage.refFromURL( slide.image ).delete()
+    this.alertas.sendFloatNotification('Se borró la slide')
   }
 
   async loadConfiguration() {
@@ -87,7 +117,7 @@ export interface Slide {
   image: string
   activado: boolean
   nombre: string
-  id: string,
+  id?: string,
   enlace?: Enlace,
 }
 
