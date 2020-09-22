@@ -1,6 +1,7 @@
 <div class="row">
     <div class="col s12">
         <button mat-raised-button
+        color="accent"
         (click)="file.click()">
             {{displayAction}}
         </button>
@@ -11,7 +12,7 @@
     <div class="col s12">
         <div class="imgArea">
             <div class="imgContent">
-                <img id="imagePreview" src="" alt="" #imagePreview>
+                <img id="imagePreview" [src]="imgPreview ? imgPreview : ''" alt="" #imagePreview>
                 <span class="delItem" (click)="deleteFile()"><i class="fas fa-times-circle"></i></span>
             </div>
             <div *ngIf="imageLoadPercent">
