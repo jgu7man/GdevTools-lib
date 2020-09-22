@@ -1,0 +1,9 @@
+::ng-deep {
+    .mat-expansion-panel-body {
+        padding: 0 0px 16px !important;
+        .collection{
+            border-right: none !important;
+            border-left: none !important;
+        }
+    }
+}
