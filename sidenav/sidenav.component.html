@@ -12,7 +12,7 @@
         </mat-expansion-panel-header>
         <div class="collection" *ngIf="parent.childs">
             <a *ngFor="let child of parent.childs"
-            [routerLink]="[child.route]" 
+            [routerLink]="[child.routeId]" 
             routerLinkActive="active"
             class="collection-item"
             gdev-color
