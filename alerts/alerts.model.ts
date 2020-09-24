@@ -2,9 +2,9 @@ export class MessageAlertModel {
     constructor(
         public message: string,
         public type: 'mensaje' | 'pregunta',
-        public confirmation?: boolean,
         public trueMsg?: string,
-        public falseMsg?: string
+        public falseMsg?: string,
+        public confirmation?: boolean,
     ){}
 }
 

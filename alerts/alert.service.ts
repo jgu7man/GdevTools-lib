@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Subject, Observable } from 'rxjs';
 import { ErrorAlertModel, MessageAlertModel, PreguntaAlertaModel } from './alerts.model';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { AlertaPopupComponent } from './alerta-popup/alerta-popup.component';
 import { MatSnackBar, MatSnackBarConfig, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 import { config } from 'process';
@@ -46,18 +46,25 @@ export class AlertService {
 
     // Función que envía una pregunta como alerta
     // y espera la respuesta true o false del usuario
-    sendRequestAlert( request: MessageAlertModel | string ): Observable<any> {
+    sendRequestAlert( request: MessageAlertModel | string ): MatDialogRef<AlertaPopupComponent> {
         
         var preguntaModel: MessageAlertModel = 
             typeof request != 'string' ? request :
                 new MessageAlertModel(request, 'pregunta')
 
         if (!preguntaModel.trueMsg) preguntaModel.trueMsg = 'aceptar'
-        if (!preguntaModel.falseMsg) preguntaModel.falseMsg = 'cancelar'
+        if ( !preguntaModel.falseMsg ) preguntaModel.falseMsg = 'cancelar'
         
-        this.requestAlert$.next(preguntaModel)
+        var dialog = this.dialog.open( AlertaPopupComponent, {
+            minWidth: '450px',
+            data: preguntaModel,
+            role: 'alertdialog',
+            disableClose: true
+        } )
+        
+        // this.requestAlert$.next(preguntaModel)
 
-        return this.responseAlert$
+        return dialog
     }
 
     
