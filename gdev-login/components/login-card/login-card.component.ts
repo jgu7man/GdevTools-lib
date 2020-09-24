@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 
 @Component({
   selector: 'gdev-login-card',
@@ -10,6 +10,9 @@ export class LoginCardComponent implements OnInit {
   fields: GdevLoginFields = {
     email: '', password:''
   }
+
+  @Input() color: string = ''
+  @Input() background: string = ''
 
   @Output() onSubmit = new EventEmitter<GdevLoginFields>()
   

@@ -1,4 +1,4 @@
-<mat-card gdev-color [background]="'primary'">
+<mat-card gdev-color [background]="background" [color]="color">
     <mat-card-header>
         <mat-card-title class="center">Iniciar Sesión</mat-card-title>
     </mat-card-header>
@@ -38,6 +38,7 @@
         <div class="row">
             <div class="col s12">
                 <button mat-raised-button
+                color="primary"
                 (click)="onSubmit.emit(fields)"
                 >Entrar</button>
             </div>
