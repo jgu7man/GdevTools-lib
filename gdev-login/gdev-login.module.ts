@@ -6,6 +6,7 @@ import { LoginCardComponent } from './components/login-card/login-card.component
 import { ColorThemeModule } from '../color/color-theme.module';
 import { GdevResponsiveModule } from '../responsive/gdev-responsive.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RestorePasswordComponent } from './components/restore-password/restore-password.component';
 
 
 
@@ -13,7 +14,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
   declarations: [
     LoginButtonComponent,
     LoginButtonDialog,
-    LoginCardComponent
+    LoginCardComponent,
+    RestorePasswordComponent
   ],
   imports: [
     CommonModule,

@@ -7,6 +7,7 @@ import { CacheService } from '../cache/cache.service';
 import { switchMap, take } from 'rxjs/operators';
 import { UserInterface } from './user.interface';
 import { auth } from 'firebase/app';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Injectable({
   providedIn: 'root'
@@ -21,6 +22,7 @@ export class LoginService {
     private afs: AngularFirestore,
     private router: Router,
     private _cache: CacheService,
+    private _snack: MatSnackBar
   ) {
 
 
@@ -112,6 +114,15 @@ export class LoginService {
 
 
     this.router.navigate( [ '' ] );
+  }
+
+  editPwd( email ) {
+    this.afAuth.sendPasswordResetEmail( email )
+      .then( res => {
+        this._snack.open( 'Se ha enviado un email al admin para cambiar su contraseña' )
+      } ).catch( error => {
+        alert( error.message )
+      } )
   }
 
 
