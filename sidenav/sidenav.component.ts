@@ -18,7 +18,6 @@ export class SidenavComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    console.log(this.structure);
   }
 
 
