@@ -2,6 +2,9 @@ import { Injectable } from '@angular/core';
 
 @Injectable({providedIn:'root'})
 export class TextService {
+
+    dateStringOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+    timeStringOptions = { hour: '2-digit', minute: '2-digit' }
     
     constructor () { }
     
@@ -58,6 +61,18 @@ export class TextService {
     generateRandomText(digits?: number) {
         return Math.random().toString( 36 )
             .substring( digits ? digits : 6 );
+    }
+
+    stringifyDate(date: Date) {
+        return date.toLocaleDateString('es-MX', this.dateStringOptions)
+    }
+
+    stringifyShortDate( date: Date ) {
+        return date.toLocaleDateString( 'es-MX' )
+    }
+
+    stringifyTime( date: Date ) {
+        return date.toLocaleTimeString( 'es-MX', this.timeStringOptions )
     }
 
 }
