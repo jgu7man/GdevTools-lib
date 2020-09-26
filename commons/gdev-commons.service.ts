@@ -60,5 +60,14 @@ export class GdevCommonsService {
     return key ? newName : newName
 
   }
+
+
   
+  
+}
+
+
+export interface SelectItem {
+  value: any,
+  viewValue: string
 }
