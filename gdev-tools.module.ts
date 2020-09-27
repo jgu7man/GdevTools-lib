@@ -16,6 +16,7 @@ import { GdevNavbarModule } from './navbar/navbar.module';
 import { GdevSidenavModule } from './sidenav/sidenav.module';
 import { ColorThemeModule } from './color/color-theme.module';
 import { AdvanceFieldsModule } from './advance-fields/advance-fields.module';
+import { MapsModule } from './maps/maps.module';
 
 
 
@@ -39,7 +40,8 @@ import { AdvanceFieldsModule } from './advance-fields/advance-fields.module';
     GdevTextModule,
     GdevNavbarModule,
     GdevSidenavModule,
-    AdvanceFieldsModule
+    AdvanceFieldsModule,
+    MapsModule
   ],
   exports: [
     CommonModule,
@@ -59,6 +61,7 @@ import { AdvanceFieldsModule } from './advance-fields/advance-fields.module';
     GdevNavbarModule,
     GdevSidenavModule,
     AdvanceFieldsModule,
+    MapsModule
   ]
 })
 export class GdevToolsModule { }

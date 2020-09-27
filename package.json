@@ -26,6 +26,7 @@
   },
   "homepage": "https://github.com/jgu7man/Gdev-Tools#readme",
   "dependencies": {
+    "@agm/core": "^3.0.0-beta.0",
     "@types/jquery": "^3.5.1",
     "@types/materialize-css": "^1.0.8",
     "jquery": "^3.5.1",
@@ -33,5 +34,8 @@
     "ngx-facebook": "^3.0.0-0",
     "nouislider": "^14.6.2",
     "wnumb": "^1.2.0"
+  },
+  "devDependencies": {
+    "@types/googlemaps": "^3.39.13"
   }
 }
