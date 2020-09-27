@@ -1,11 +1,12 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from "src/environments/environment";
 
 @Injectable({ providedIn: 'root' })
 export class GdevGeolocationService {
 
-    private apiKey = 'AIzaSyBR4GbQX1WVLcuvZpWKZJ-jkTQCzvUfcKw'
+    private apiKey = environment.gdevMaps
 
     constructor(
         private _http: HttpClient

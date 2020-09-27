@@ -5,7 +5,7 @@ import { BehaviorSubject } from 'rxjs'
 import { AngularFireMessaging } from '@angular/fire/messaging';
 import { mergeMapTo } from 'rxjs/operators';
 import { SucursalesService } from '../../services/sucurasales.service';
-import { GdevGeolocationService } from './gdev-geolocation.service';
+import { GdevGeolocationService } from '../maps/gdev-geolocation.service';
 
 
 @Injectable({providedIn:'root'})
