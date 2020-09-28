@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 // import { MatCarousel, MatCarouselComponent } from '@ngmodule/material-carousel';
 import { GdevSliderService, SliderConfig, Slide } from '../gdev-slider.service';
 import { Router } from '@angular/router';
@@ -12,6 +12,7 @@ export class GdevSliderComponent implements OnInit {
   sliderConfig: SliderConfig
   
   slides: Slide[] = [];
+  @Input() slidesCollection: string
 
   constructor (
     public _slider: GdevSliderService,
@@ -22,6 +23,9 @@ export class GdevSliderComponent implements OnInit {
 
 
   ngOnInit(): void {
+    this._slider.loadConfiguration(
+      this.slidesCollection ? this.slidesCollection : null
+    )
     this.loadSliderConfig()
     this.loadSlides()
   }
@@ -33,7 +37,9 @@ export class GdevSliderComponent implements OnInit {
   }
 
   async loadSlides() {
-    this.slides = await this._slider.loadSlides()
+    this.slides = await this._slider.loadSlides(
+      this.slidesCollection
+      ? this.slidesCollection : null )
   }
 
   

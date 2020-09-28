@@ -38,27 +38,34 @@ export class GdevSliderService {
     private alertas: AlertService,
     private location: Location
   ) { 
-    this.loadConfiguration()
     this.getSlidesList()
   }
 
-  async addSlide( slide: Slide ) {
-    const slidesRef = this.fs.collection( 'gdev-tools/slider/slides' )
+  async addSlide( slide: Slide, collection?: string ) {
+    const slidesRef = this.fs.collection( collection
+        ? `${ collection }/slider/slides`
+        : 'gdev-tools/slider/slides' )
     var nuSlide = await slidesRef.add( slide )
     slidesRef.doc(nuSlide.id).update({id: nuSlide.id})
     return 
   }
 
-  async getSlidesList() {
-    this.slides$ = this.fs.collection( 'gdev-tools/slider/slides' )
+  async getSlidesList( collection?: string) {
+    this.slides$ = this.fs.collection( collection
+        ? `${ collection }/slider/slides`
+        : 'gdev-tools/slider/slides' )
     .valueChanges()
   }
 
 
-  async loadSlides() {
+  async loadSlides(collection?: string) {
     try {
-      const sliderRef = this.fs.collection( 'gdev-tools/slider/slides' ).ref
-        .where('activado','==', true)
+      const sliderRef = this.fs.collection( collection
+        ? `${ collection }/slider/slides`
+        : 'gdev-tools/slider/slides' 
+      ).ref.where('activado','==', true)
+
+      
       const slidesDocs = await sliderRef.get()
       const slides: any[] = []
 
@@ -73,23 +80,28 @@ export class GdevSliderService {
     }
   }
 
-  async updateSlide( slide: Slide ) {
-    const slidesRef = this.fs.collection( 'gdev-tools/slider/slides' ).ref
+  async updateSlide( slide: Slide, collection?: string ) {
+    const slidesRef = this.fs.collection( collection
+      ? `${ collection }/slider/slides`
+      : 'gdev-tools/slider/slides' ).ref
     slidesRef.doc( slide.id ).update( slide )
     this.alertas.sendFloatNotification('Slide modificada')
     return
   }
 
 
-  async deleteSlide( slide: Slide ) {
-    await this.fs.collection( 'gdev-tools/slider/slides' ).ref
+  async deleteSlide( slide: Slide, collection?: string ) {
+    await this.fs.collection( collection
+      ? `${ collection }/slider/slides`
+      : 'gdev-tools/slider/slides' ).ref
       .doc( slide.id ).delete()
     await this.storage.storage.refFromURL( slide.image ).delete()
     this.alertas.sendFloatNotification('Se borró la slide')
   }
 
-  async loadConfiguration() {
-    const sliderRef = this.fs.collection( 'gdev-tools' ).ref.doc( 'slider' )
+  async loadConfiguration( collection?: string) {
+    const sliderRef = this.fs.collection( collection
+      ? collection : 'gdev-tools' ).ref.doc( 'slider' )
     const sliderDoc = await sliderRef.get()
     if ( sliderDoc.exists ) {
       this.$sliderConfig.next(sliderDoc.data() as SliderConfig)
@@ -97,9 +109,10 @@ export class GdevSliderService {
     
   }
 
-  async setSliderConfiguration( config: SliderConfig ) {
+  async setSliderConfiguration( config: SliderConfig, collection?: string ) {
     try {
-      const sliderRef = this.fs.collection( 'gdev-tools' ).ref.doc( 'slider' )
+      const sliderRef = this.fs.collection( collection
+        ? collection : 'gdev-tools' ).ref.doc( 'slider' )
       await sliderRef.set( config, { merge: true } )
       this.alertas.sendMessageAlert( 'Se guardó la configuración' )
       this.location.back()
