@@ -38,7 +38,6 @@ export class GdevSliderService {
     private alertas: AlertService,
     private location: Location
   ) { 
-    this.getSlidesList()
   }
 
   async addSlide( slide: Slide, collection?: string ) {
