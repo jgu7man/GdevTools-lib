@@ -5,9 +5,12 @@
         [background]="'dark'"
         [color]="'bg1'"
         [expanded]="onActive(parent.routeId)"
+        #parentPanel
         >
         <mat-expansion-panel-header 
-            [routerLink]="parent.route ? [parent.route] : []">
+            [routerLink]="parent.route ? [parent.route] : []"
+            [ngClass]="{'active': parentPanel.expanded}"
+            >
             {{parent.name}}
         </mat-expansion-panel-header>
         <div class="collection" *ngIf="parent.childs">

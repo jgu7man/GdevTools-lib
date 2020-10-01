@@ -35,7 +35,6 @@ export class MatCarouselSlideComponent
 
   public ngOnInit(): void {
     if (this.image) {
-      console.log(this.enlace);
       this.image = this.sanitizer.bypassSecurityTrustStyle(`url("${this.image}")`);
     }
   }
