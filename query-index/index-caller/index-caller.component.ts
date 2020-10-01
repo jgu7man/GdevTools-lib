@@ -12,7 +12,6 @@ export class IndexCallerComponent implements OnInit, OnChanges {
   public last
   public prodCant
   constructor ( public _index: GdevIndexService ) {
-    
    }
 
   ngOnInit() {

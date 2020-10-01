@@ -94,38 +94,51 @@ export class GdevIndexService {
         this.field = !this.field ? FieldToSort : this.field
         this.queryCant = queryCant
         this.first = 1 
-        this.last = this.first + (this.queryCant-1)
-
-
+        this.last = this.first + ( this.queryCant - 1 )
+        
+        
+        
         // Get the collection size to index
         var queryCollection = this.fs.collection( this.collection ).ref.orderBy( this.field, this.order )
-        this.collectionSize = (await queryCollection.get()).size
-
+        this.collectionSize = ( await queryCollection.get() ).size;
+        
+        this.last = this.collectionSize < this.queryCant
+            ? this.collectionSize
+            : this.last;
+        
+        this.queryCant = this.collectionSize < this.queryCant
+            ? this.collectionSize
+            : this.queryCant < this.collectionSize
+                ? this.collectionSize
+                : 20 ;
+        
         // Define limit and get query
         var query = await queryCollection.limit(this.queryCant).get()
         
         this.pageContent = []
         if ( this.collectionSize > 0 ) {
             await query.forEach( async doc => {
-                let prod = doc.data()
-                prod[ 'id' ] = doc.id
-                return this.pageContent.push( prod )
+                return this.pageContent.push( doc.data() )
             } )
-            this.dataIndexed.emit( {
+
+            
+            this.dataIndexed.next( {
                 firstIndex: this.first,
                 lastIndex: this.last,
                 collectionSize: this.collectionSize
             } )
+            // console.log( this.pageContent );
             this.queryData.next( this.pageContent )
 
 
+            // console.log( this.pageContent[ this.last - 1 ], this.last);
             // Define anchors
             this.pageAnchors.push( {
                 page: this.first,
                 firstQuery: this.pageContent[ 0 ][ this.field ],
                 lastQuery: this.collectionSize > this.queryCant
                     ? this.pageContent[ this.queryCant - 1 ][ this.field ]
-                    : this.pageContent[ this.collectionSize -1 ][this.field]
+                    : this.pageContent[ this.last - 1 ][this.field]
             } )
         }
         
@@ -138,6 +151,7 @@ export class GdevIndexService {
         // Define docs to query
         this.loadingQuery.next( true )
         try {
+            this.pageContent = []
             this.pageAnchors = []
             this.first = 1
             this.last = this.first + ( this.queryCant - 1 )
@@ -148,17 +162,27 @@ export class GdevIndexService {
             .where( this.field, this.compareType, this.criteria )
             // .orderBy( this.field, this.order )
             this.collectionSize = ( await queryCollection.get() ).size
-
+            this.last = this.collectionSize < this.queryCant ? this.collectionSize : this.last;
+            this.queryCant = this.collectionSize < this.queryCant
+                ? this.collectionSize
+                : this.queryCant < this.collectionSize
+                    ? this.collectionSize 
+                    : 20;
             
+            // console.log(this.collectionSize, this.queryCant);
             // Define limit and get query
             var query = await queryCollection.limit( this.queryCant ).get()
 
-            await query.forEach( async doc => { return this.pageContent.push( doc.data() ) } )
+            await query.forEach( async doc => {
+                return this.pageContent.push( doc.data() )
+            } )
             this.dataIndexed.emit( {
                 firstIndex: this.first,
                 lastIndex: this.last,
                 collectionSize: this.collectionSize
             } )
+
+            // console.log(this.pageContent);
             this.queryData.next( this.pageContent )
 
 
@@ -166,7 +190,7 @@ export class GdevIndexService {
             this.pageAnchors.push( {
                 page: this.first,
                 firstQuery: this.pageContent[ 0 ][ this.field ],
-                lastQuery: this.pageContent[ this.queryCant - 1 ][ this.field ]
+                lastQuery: this.pageContent[ this.last - 1 ][ this.field ]
             } )
             return true
         } catch (error) {
