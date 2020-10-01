@@ -24,7 +24,11 @@
                     type="text"
                     name="password"
                     [(ngModel)]="fields.password"
+                    [type]="hide ? 'password' : 'text'"
                     >
+                    <mat-icon matSuffix (click)="hide = !hide">
+                        {{hide ? 'visibility_off' : 'visibility'}}
+                    </mat-icon>
                 </mat-form-field>
             </div>
         </div>

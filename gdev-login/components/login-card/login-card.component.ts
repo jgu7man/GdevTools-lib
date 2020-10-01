@@ -11,6 +11,8 @@ export class LoginCardComponent implements OnInit {
     email: '', password:''
   }
 
+  hide = true;
+
   @Input() color: string = ''
   @Input() background: string = ''
 
