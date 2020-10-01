@@ -2,7 +2,7 @@
     <mat-expansion-panel
         *ngFor="let parent of structure"
         gdev-color
-        [background]="'dark'"
+        [background]="'complement1'"
         [color]="'bg1'"
         [expanded]="onActive(parent.routeId)"
         #parentPanel
@@ -20,7 +20,7 @@
             class="collection-item"
             gdev-color
             [color]="'bg1'"
-            [background]="'dark'"
+            [background]="'complement2'"
             >{{child.name}}</a>
         </div>
     </mat-expansion-panel>

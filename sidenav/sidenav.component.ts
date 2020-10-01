@@ -3,6 +3,7 @@ import { SidenavNode } from './sidenav.interface';
 import { Location } from '@angular/common';
 import { GdevSidenavService } from './sidenav.service';
 
+
 @Component({
   selector: 'gdev-sidenav',
   templateUrl: './sidenav.component.html',
