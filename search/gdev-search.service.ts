@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFirestore, AngularFirestoreDocument, DocumentData } from '@angular/fire/firestore';
 import { Loading } from '../loading/loading.service';
 
 @Injectable({
@@ -26,15 +26,15 @@ export class GdevSearchService {
       queryCap = this.capitalize( query ),
       AqueryCap = queryCap.split( ' ' );
     
-    
-    this.colDocs = !this.colDocs ? await colRef.get() : this.colDocs
-    console.log(this.colDocs);
+    this.colDocs = []
+    this.colDocs = await colRef.get() 
     
     var finded = []
     var suggest = []
     
     await this.loading.asyncForEach( this.colDocs.docs, async ( doc ) => {
       let Doc = doc.data()
+      console.log( Doc[ field ], query);
       
 
       // 1. Busca query normal
