@@ -22,24 +22,17 @@ export class SeoService {
     }
     
     generarTags( config: SEOCONFIG ) {
-        var defaultConfig: SEOCONFIG = {
-            title: 'Las motos',
-            description: 'Concesionario de Motos y Repuestos Auteco | Crédito fácil y rápida!!! | Promociones y descuentos permanentes',
-            image: 'https://tiendalasmotos.com/assets/img/lasmotos-isotipo-transp-1x1.png',
-            keywords: 'auteco las motos, taller de motos, venta de motos, motos fácil manejo, motos electricas, motocarros, auteco, brilla, credito, crédito para motos',
-            slug:'',
-        }
         
-        config.keywords = 
-        !config.keywords ? 
-        config.title ?
-        config.title + ', ' + defaultConfig.keywords
-        :    defaultConfig.keywords
-        :    config.keywords + ', ' + defaultConfig.keywords
-        config.title = config.title ? `${defaultConfig.title} - ${config.title}` : defaultConfig.title
-        config.description = config.description ? config.description : defaultConfig.description
-        config.image = config.image ? config.image : defaultConfig.image
-        config.slug = config.slug ? config.slug : defaultConfig.slug
+        
+        config.keywords = !config.keywords
+            ? config.title
+                ? config.title
+                : ''
+            : config.keywords
+        
+        config.description = config.description ? config.description : ''
+        config.image = config.image ? config.image : ''
+        config.slug = config.slug ? config.slug : ''
 
         
         
