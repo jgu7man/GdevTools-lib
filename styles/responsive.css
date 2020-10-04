@@ -3,6 +3,12 @@
     align-items: center;
 }
 
+.space-around {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
 @media only screen and (max-width: 600px) {
     .hide-on-small-only,
     .tabs-wrapper,
