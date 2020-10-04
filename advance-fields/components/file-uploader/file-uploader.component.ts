@@ -13,7 +13,7 @@ export class FileUploaderComponent implements OnInit {
 
   @Input() displayAction: string
   @Input() folder: string
-  @Input() imgPreview
+  @Input() srcPreview
 
   imageLoadPercent: number
   image: imageEl
@@ -31,22 +31,22 @@ export class FileUploaderComponent implements OnInit {
   }
   
   onFileSelected( files ) {
-    this.imgPreview = files.target.files[0]
+    this.srcPreview = files.target.files[0]
       var reader = new FileReader()
       reader.onload = () => {
         var img: any;
         img = document.getElementById('imagePreview' )
         img.src = reader.result
       }
-    reader.readAsDataURL( this.imgPreview )
+    reader.readAsDataURL( this.srcPreview )
     this.uploadStorage()
   }
 
   async uploadStorage() {
     const
-      path = `${this.folder}/${ this.imgPreview.name }`,
+      path = `${this.folder}/${ this.srcPreview.name }`,
       ref = this.storage.ref( path ),
-      task = this.storage.upload( path, this.imgPreview );
+      task = this.storage.upload( path, this.srcPreview );
 
     await task.percentageChanges().subscribe( res => {
       return this.imageLoadPercent = res
@@ -56,7 +56,7 @@ export class FileUploaderComponent implements OnInit {
       finalize( async () => {
         await ref.getDownloadURL()
           .subscribe( res => {
-            this.image = { url: res, alt: this.imgPreview.name }
+            this.image = { url: res, alt: this.srcPreview.name }
             this.imageURL.emit( this.image )
           } )
         return
