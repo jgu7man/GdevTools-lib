@@ -15,7 +15,7 @@ import { RestorePasswordComponent } from './components/restore-password/restore-
     LoginButtonComponent,
     LoginButtonDialog,
     LoginCardComponent,
-    RestorePasswordComponent
+    RestorePasswordComponent,
   ],
   imports: [
     CommonModule,
@@ -27,7 +27,7 @@ import { RestorePasswordComponent } from './components/restore-password/restore-
   ],
   exports: [
     LoginButtonComponent,
-    LoginCardComponent
+    LoginCardComponent,
   ],
   entryComponents: [
     LoginButtonDialog

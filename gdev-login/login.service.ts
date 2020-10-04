@@ -61,7 +61,7 @@ export class LoginService {
 
     // Abre el popup de autenticación
     const provider = new auth.GoogleAuthProvider();
-    var credential = await this.afAuth.signInWithPopup( provider )
+    var credential = await this.afAuth.auth.signInWithPopup( provider )
 
     // Guardar los datos de cliente nuevo en firebase
     return this.updateUserData( credential.user )
@@ -71,7 +71,7 @@ export class LoginService {
 
     // Abre el popup de autenticación
     const provider = new auth.FacebookAuthProvider();
-    var credential = await this.afAuth.signInWithPopup( provider )
+    var credential = await this.afAuth.auth.signInWithPopup( provider )
 
     // Guardar los datos de cliente nuevo en firebase
     return this.updateUserData( credential.user )
@@ -79,7 +79,7 @@ export class LoginService {
 
   async passwordLogin( email, pwd ) {
     try {
-      var credential = await this.afAuth.signInWithEmailAndPassword( email, pwd )
+      var credential = await this.afAuth.auth.signInWithEmailAndPassword( email, pwd )
       return this.updateUserData( credential.user )
     } catch ( error ) {
       console.log( error )
@@ -117,7 +117,7 @@ export class LoginService {
   }
 
   editPwd( email ) {
-    this.afAuth.sendPasswordResetEmail( email )
+    this.afAuth.auth.sendPasswordResetEmail( email )
       .then( res => {
         this._snack.open( 'Se ha enviado un email al admin para cambiar su contraseña' )
       } ).catch( error => {
@@ -130,7 +130,7 @@ export class LoginService {
   //? Cerrar sesión
 
   async singOut() {
-    await this.afAuth.signOut();
+    await this.afAuth.auth.signOut();
     localStorage.removeItem( 'mii' )
     return this.router.navigate( [ '/' ] );
   }
