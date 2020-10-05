@@ -31,9 +31,15 @@ export class Loading {
         this.on$ = false
     }
 
-    async asyncForEach( array: any[], callback: any ) {
-        for ( let index = 0; index < array.length; index++ ) {
-            await callback( array[ index ], index, array );
+    async asyncForEach( array: any[] | Map<number, any>, callback: any ) {
+        if ( Array.isArray( array ) ) {
+            for ( let index = 0; index < array.length; index++ ) {
+                await callback( array[ index ], index, array );
+            }
+        } else {
+            for ( let index = 0; index < array.size; index++ ) {
+                await callback( array.get(index), index, array );
+            }
         }
     }
 
