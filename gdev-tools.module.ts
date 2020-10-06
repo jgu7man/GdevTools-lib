@@ -1,8 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { GdevAlertModule } from './alerts/gdev-alert.module';
-import { CollapsibleTableModule } from './collapsible-table/collapsible-table.module';
-import { FormConstructorModule } from './form-constructor/form-constructor.module';
 import { GdevLoginModule } from './gdev-login/gdev-login.module';
 import { GdevSliderModule } from './gdev-slider/gdev-slider.module';
 import { LoadingModule } from './loading/loading.module';
@@ -28,8 +26,6 @@ import { CommonsModule } from './commons/commons.module';
     CommonModule,
     GdevAlertModule,
     ColorThemeModule,
-    CollapsibleTableModule,
-    FormConstructorModule,
     GdevLoginModule,
     GdevSliderModule,
     LoadingModule,
@@ -49,8 +45,6 @@ import { CommonsModule } from './commons/commons.module';
     CommonModule,
     ColorThemeModule,
     GdevAlertModule,
-    CollapsibleTableModule,
-    FormConstructorModule,
     GdevLoginModule,
     GdevSliderModule,
     LoadingModule,
