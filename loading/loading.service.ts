@@ -125,6 +125,11 @@ export class Loading {
     }
 
     
+    waitngBar$: Subject<any> = new Subject()
+    toggleWaitingBar(forcedState?: boolean): Observable<boolean> {
+        this.waitngBar$.next(forcedState)
+        return this.waitngBar$
+    }
 
 
 }

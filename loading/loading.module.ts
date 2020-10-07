@@ -1,15 +1,20 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LoadingComponent } from './loading.component';
+import { WaitingBarComponent } from './components/waiting-bar/waiting-bar.component';
+import { MaterialModule } from 'src/app/material.module';
 
 @NgModule({
   declarations: [
-    LoadingComponent
+    LoadingComponent,
+    WaitingBarComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    MaterialModule
   ], exports: [
-    LoadingComponent
+    LoadingComponent,
+    WaitingBarComponent
   ]
 })
 export class LoadingModule { }
