@@ -1,8 +1,7 @@
-import { Injectable } from "@angular/core";
+import { Injectable, EventEmitter, Output } from '@angular/core';
 import { Subject, Observable, Observer, BehaviorSubject, Subscription } from 'rxjs';
 import { Router, ActivatedRoute, Params, NavigationEnd } from '@angular/router';
 import { filter, map, switchMap, first } from 'rxjs/operators';
-import { promise } from 'protractor';
 
 @Injectable( { providedIn: 'root' } )
 export class Loading {
@@ -125,9 +124,9 @@ export class Loading {
     }
 
     
-    waitngBar$: Subject<any> = new Subject()
+    @Output() waitngBar$: EventEmitter<boolean> = new EventEmitter()
     toggleWaitingBar(forcedState?: boolean): Observable<boolean> {
-        this.waitngBar$.next(forcedState)
+        this.waitngBar$.emit(forcedState)
         return this.waitngBar$
     }
 
