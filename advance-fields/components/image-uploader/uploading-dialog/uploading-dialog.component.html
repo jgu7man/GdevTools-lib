@@ -1,0 +1,6 @@
+<gdev-image-preview
+*ngFor="let img of data.files;"
+[folder]="data.folder"
+[image]="img"
+(imageURL)="setResult($event)"
+></gdev-image-preview>
