@@ -57,7 +57,8 @@ export class ImagePreviewComponent implements OnInit, OnDestroy {
 
   async uploadStorage() {
     const
-      path = `${ this.folder }/${ this.image.name }`,
+      name = `${this.image.name}-${new Date().getTime()}`,
+      path = `${ this.folder }/${ name }`,
       ref = this.storage.ref( path ),
       task = this.storage.upload( path, this.image );
 

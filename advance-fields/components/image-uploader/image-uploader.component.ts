@@ -51,7 +51,8 @@ export class ImageUploaderComponent implements OnInit {
       folder: this.folder
     }
     var dialog = this._dialog.open( UploadingComponent, {
-      data: data
+      data: data,
+      maxWidth: 250
     } )
     
     dialog.afterClosed().subscribe( files => {

@@ -20,6 +20,9 @@ export class UploadingComponent implements OnInit {
 
   setResult(result) {
     this.srcGroup.push( result )
+  }
+  
+  onClose() {
     if ( this.srcGroup.length == this.data.objects )
       this._dialog.close(this.srcGroup)
   }
