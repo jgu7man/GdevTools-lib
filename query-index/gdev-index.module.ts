@@ -19,7 +19,8 @@ import { SortPipe } from './sort.pipe';
   ],
   exports: [
     IndexCallerComponent,
-    SortOptionsComponent
+    SortOptionsComponent,
+    SortPipe
   ]
 })
 export class GdevIndexModule { }
