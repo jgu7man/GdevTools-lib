@@ -24,7 +24,8 @@ import { GdevSliderConfigComponent } from './gdev-slider-config/gdev-slider-conf
   ],
   exports: [
     GdevSliderComponent,
-    GdevSliderConfigComponent
+    GdevSliderConfigComponent,
+    MatCarouselModule
   ]
 })
 export class GdevSliderModule { }
