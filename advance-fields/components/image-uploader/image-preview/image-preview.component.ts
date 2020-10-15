@@ -32,7 +32,6 @@ export class ImagePreviewComponent implements OnInit, OnDestroy {
     this.imageSubs = this._image.pipe(
       distinctUntilChanged(),
     ).subscribe( image => {
-      console.log(image);
       if ( image ) {
         if ( image instanceof File ) {
           this.image = image

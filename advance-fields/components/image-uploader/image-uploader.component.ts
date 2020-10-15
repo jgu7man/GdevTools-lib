@@ -32,12 +32,10 @@ export class ImageUploaderComponent implements OnInit {
   ngOnInit(): void {
     if ( !this.displayAction ) this.displayAction = 'Cargar'
     if ( !this.folder ) this._alerta.sendMessageAlert( 'falta agregar un folder' )
-    console.log(this.srcGroup, this.multipleFiles);
   }
   
   onFileSelected( file ) {
     this.image = file.target.files[ 0 ]
-    console.log('single');
   }
 
   onFilesSelected( files ) {
@@ -69,7 +67,6 @@ export class ImageUploaderComponent implements OnInit {
       this.srcPreview = result
       this.result.emit(this.srcPreview)
     }
-    console.log(this.srcPreview);
     
   }  
 
