@@ -32,7 +32,6 @@ export class ImageUploaderComponent implements OnInit {
   ngOnInit(): void {
     if ( !this.displayAction ) this.displayAction = 'Cargar'
     if ( !this.folder ) this._alerta.sendMessageAlert( 'falta agregar un folder' )
-    console.log(this.srcGroup, this.multipleFiles);
   }
   
   onFileSelected( file ) {

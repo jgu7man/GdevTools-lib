@@ -28,11 +28,9 @@ export class ImagePreviewComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
-    console.log(this.srcPreview);
     this.imageSubs = this._image.pipe(
       distinctUntilChanged(),
     ).subscribe( image => {
-      console.log(image);
       if ( image ) {
         if ( image instanceof File ) {
           this.image = image
