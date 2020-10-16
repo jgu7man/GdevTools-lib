@@ -1,4 +1,4 @@
-<div class="row" >
+<div class="row" *ngIf="prodCant;" >
     <div class="col s2">
         <button mat-raised-button [color]="'primary'" (click)="_index.getPrevPage()" [disabled]="first<=1">Atrás</button>
     </div>

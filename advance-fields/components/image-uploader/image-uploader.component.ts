@@ -36,7 +36,6 @@ export class ImageUploaderComponent implements OnInit {
   
   onFileSelected( file ) {
     this.image = file.target.files[ 0 ]
-    console.log('single');
   }
 
   onFilesSelected( files ) {
@@ -68,7 +67,6 @@ export class ImageUploaderComponent implements OnInit {
       this.srcPreview = result
       this.result.emit(this.srcPreview)
     }
-    console.log(this.srcPreview);
     
   }  
 
