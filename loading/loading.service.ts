@@ -1,14 +1,17 @@
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Injectable, EventEmitter, Output } from '@angular/core';
 import { Subject, Observable, Observer, BehaviorSubject, Subscription } from 'rxjs';
 import { Router, ActivatedRoute, Params, NavigationEnd } from '@angular/router';
 import { filter, map, switchMap, first } from 'rxjs/operators';
+import { LoadingOverlayComponent } from './components/loading-overlay/loading-overlay.component';
 
 @Injectable( { providedIn: 'root' } )
 export class Loading {
 
     constructor (
         private router: Router,
-        private activatedRoute: ActivatedRoute
+        private activatedRoute: ActivatedRoute,
+        private _dialog: MatDialog
     ) {
         
     }
@@ -128,6 +131,23 @@ export class Loading {
     toggleWaitingBar(forcedState?: boolean): Observable<boolean> {
         this.waitngBar$.emit(forcedState)
         return this.waitngBar$
+    }
+
+    public loadingSpinnerState: boolean = false
+    public loadingBox: MatDialogRef<LoadingOverlayComponent>
+    toggleWaitingSpinner( action?: boolean ) {
+        console.log(action);
+        if ( action ) {
+            this.loadingBox = this._dialog
+                .open( LoadingOverlayComponent, {
+                    panelClass:'loading-spinner'
+                } )        
+            
+            this.loadingSpinnerState = action
+        } else {
+            this.loadingBox.close()
+            this.loadingSpinnerState = action
+        }
     }
 
 
