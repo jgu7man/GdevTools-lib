@@ -12,6 +12,7 @@ export class ImagePreviewComponent implements OnInit, OnDestroy {
 
   @Input() srcPreview: imageElement
   @Input() folder: string
+  @Input() prefix: string
   
   private _image : BehaviorSubject<any> = new BehaviorSubject({});
   @Input() set image(img: any) { this._image.next(img); }
@@ -56,7 +57,9 @@ export class ImagePreviewComponent implements OnInit, OnDestroy {
 
   async uploadStorage() {
     const
-      name = `${this.image.name}-${new Date().getTime()}`,
+      name = !this.prefix
+        ? `${ this.image.name }-${ new Date().getTime() }`
+        : `${this.prefix}-${this.image.name}`,
       path = `${ this.folder }/${ name }`,
       ref = this.storage.ref( path ),
       task = this.storage.upload( path, this.image );

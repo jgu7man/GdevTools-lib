@@ -14,6 +14,7 @@ export class ImageUploaderComponent implements OnInit {
 
   @Input() displayAction: string
   @Input() folder: string
+  @Input() prefix: string
   @Input() srcPreview: imageElement
   @Input() srcGroup: imageElement[] = []
   @Input() multiple: boolean = false
