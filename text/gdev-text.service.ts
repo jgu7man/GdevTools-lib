@@ -42,6 +42,11 @@ export class TextService {
             .substring( digits ? digits : 6 );
     }
 
+    generateColorCode() {
+    var randomColor = Math.floor( Math.random() * 16777215 ).toString( 16 );
+    return randomColor;
+  }
+
     stringifyDate(date: Date) {
         return date.toLocaleDateString('es-MX', this.dateStringOptions)
     }
