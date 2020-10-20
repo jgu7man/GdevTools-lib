@@ -1,6 +1,7 @@
-import { Component, OnInit, ChangeDetectionStrategy, ElementRef, ViewChild } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, ElementRef, ViewChild, Input } from '@angular/core';
 import { Subject, Observable, BehaviorSubject } from 'rxjs';
 import { Loading } from '../../loading.service';
+import { distinctUntilChanged } from 'rxjs/operators';
 
 @Component({
   selector: 'waiting-bar',
@@ -10,16 +11,14 @@ import { Loading } from '../../loading.service';
 })
 export class WaitingBarComponent implements OnInit {
 
-  state: boolean = false
-  state$: BehaviorSubject<boolean> = new BehaviorSubject(false)
+  state$: BehaviorSubject<boolean> = new BehaviorSubject( false )
+  @Input() set state(toggle: boolean) { this.state$.next(toggle); }
+  get state() { return this.state$.getValue()}
 
   constructor(private loading: Loading) { }
 
   ngOnInit(): void {
     this.loading.toggleWaitingBar().subscribe( forcedState => {
-      // this.state = !this.state
-      // console.log(this.state);
-      // console.log(forcedState);
       !forcedState
         ? this.state = !this.state
         : this.state = forcedState
