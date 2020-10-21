@@ -63,7 +63,7 @@ import { TimeModule } from './time/time.module';
     AdvanceFieldsModule,
     MapsModule,
     CommonsModule,
-    ChatModule
+    ChatModule,
     TimeModule
   ]
 })
