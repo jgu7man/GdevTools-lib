@@ -21,7 +21,7 @@ import { MaterialModule } from 'src/app/material.module';
     FormsModule,
     MaterialModule,
     AgmCoreModule.forRoot( {
-      apiKey: environment.gdevMaps
+      apiKey: environment[ 'gdevMaps' ] ? environment[ 'gdevMaps' ] : ''
     } )
   ],
   exports: [
