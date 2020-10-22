@@ -136,7 +136,6 @@ export class Loading {
     public loadingSpinnerState: boolean = false
     public loadingBox: MatDialogRef<LoadingOverlayComponent>
     toggleWaitingSpinner( action?: boolean ) {
-        console.log(action);
         if ( action ) {
             this.loadingBox = this._dialog
                 .open( LoadingOverlayComponent, {
