@@ -7,20 +7,29 @@ import { Observable } from 'rxjs';
 export class CacheService {
 
   cacheTagName: string = 'gdev-data'
+  storage: 'local' | 'session' = 'session'
   constructor () { }
   
   updateData(key, value) {
     var sesData = {}
-    sesData = JSON.parse( sessionStorage.getItem( this.cacheTagName ) )
+    sesData = JSON.parse(
+      this.storage == 'local'
+        ? localStorage.getItem( this.cacheTagName ) 
+        : sessionStorage.getItem( this.cacheTagName )
+    )
 
     if ( key && value ) {
 
       if ( sesData ) {
         sesData[ key ] = value
-        sessionStorage.setItem( this.cacheTagName, JSON.stringify( sesData ) )
+        this.storage == 'local' 
+          ? localStorage.setItem( this.cacheTagName, JSON.stringify( sesData ) )
+          : sessionStorage.setItem( this.cacheTagName, JSON.stringify( sesData ) )
       } else {
         sesData = { [ key ]: value }
-        sessionStorage.setItem( this.cacheTagName, JSON.stringify( sesData ) )
+        this.storage == 'local'
+          ? localStorage.setItem( this.cacheTagName, JSON.stringify( sesData ) )
+          : sessionStorage.setItem( this.cacheTagName, JSON.stringify( sesData ) )
       }
 
     } 
@@ -28,12 +37,18 @@ export class CacheService {
   }
 
   async getFullData() {
-    var sesData = JSON.parse( sessionStorage.getItem( this.cacheTagName ) )
+    var sesData =
+    this.storage == 'local'
+      ? JSON.parse( localStorage.getItem( this.cacheTagName ) )
+      : JSON.parse( sessionStorage.getItem( this.cacheTagName ) )
     return sesData ? sesData : null
   }
 
-  getDataKey(key:string) {
-    var sesData = JSON.parse( sessionStorage.getItem( this.cacheTagName ) )
+  getDataKey( key: string ) {
+    var sesData = 
+    this.storage == 'local'
+        ? JSON.parse( localStorage.getItem( this.cacheTagName ) )
+      : JSON.parse( sessionStorage.getItem( this.cacheTagName ) )
     if ( sesData ) {
       return sesData[key] ? sesData[key] : null
     } else {
