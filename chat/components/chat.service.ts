@@ -4,6 +4,7 @@ import { Store } from '@ngrx/store';
 import { AppState } from '../../../app.state';
 import * as actions from '../store/chat.actions'
 import { map, switchMap, take, pluck } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -21,6 +22,8 @@ export class ChatService {
   toggleChatbox() {
     this.store.dispatch(actions.toggle())
   }
+
+  sendMessage$: Subject<string> = new Subject()
 
   reciveMessage(message) {
     this.store.dispatch(actions.recive(message))

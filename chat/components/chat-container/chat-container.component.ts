@@ -16,7 +16,10 @@ export class ChatContainerComponent implements OnInit, OnDestroy {
 
   public conversation: Interaction[] = []
   storeSubs: Subscription
-  @Output() closeChatWindow: EventEmitter<any> =  new EventEmitter()
+  @Output() closeChatWindow: EventEmitter<any> = new EventEmitter()
+  @Output() sendMessage: EventEmitter<any> = new EventEmitter()
+  @Output() reciveMessage: EventEmitter<any> = new EventEmitter()
+
 
   constructor (
     private store: Store<AppState>,
