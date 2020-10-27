@@ -16,7 +16,6 @@ import { ColorThemeModule } from './color/color-theme.module';
 import { AdvanceFieldsModule } from './advance-fields/advance-fields.module';
 import { MapsModule } from './maps/maps.module';
 import { CommonsModule } from './commons/commons.module';
-import { ChatModule } from './chat/chat.module';
 import { TimeModule } from './time/time.module';
 
 
@@ -42,7 +41,6 @@ import { TimeModule } from './time/time.module';
     AdvanceFieldsModule,
     MapsModule,
     CommonsModule,
-    ChatModule,
     TimeModule
   ],
   exports: [
@@ -63,7 +61,6 @@ import { TimeModule } from './time/time.module';
     AdvanceFieldsModule,
     MapsModule,
     CommonsModule,
-    ChatModule,
     TimeModule
   ]
 })
