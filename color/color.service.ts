@@ -27,4 +27,8 @@ export class ColorService {
     var randomColor = '#' + Math.floor( Math.random() * 16777215 ).toString( 16 );
     return randomColor;
   }
+
+  generateBrightColor() {
+    return "hsl(" + Math.ceil(360 * Math.random()) + ",60%,90%)";
+  }
 }
