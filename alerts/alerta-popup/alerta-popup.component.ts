@@ -1,11 +1,12 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, ViewEncapsulation } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MessageAlertModel, PreguntaAlertaModel } from '../alerts.model';
 
 @Component({
   selector: 'gdev-alerta-popup',
   templateUrl: './alerta-popup.component.html',
-  styleUrls: ['./alerta-popup.component.scss']
+  styleUrls: ['./alerta-popup.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class AlertaPopupComponent implements OnInit {
 

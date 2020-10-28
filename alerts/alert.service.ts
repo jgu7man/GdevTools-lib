@@ -80,9 +80,10 @@ export class AlertService {
 
         confirmText = confirmText ? confirmText : 'ok';
         let config: MatSnackBarConfig = {
-            duration: duration ? duration : 5000,
+            duration: duration ? duration : 30000,
             verticalPosition: vPosition ? vPosition : 'bottom',
             horizontalPosition: hPosition ? hPosition : 'right',
+            panelClass:['snackBar']
         }
 
         this.snack.open( notification, confirmText, config)
