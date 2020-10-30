@@ -56,6 +56,20 @@ export class CacheService {
     }
   }
 
+  deleteDataKey(key: string) {
+    var sesData =
+      this.storage == 'local'
+        ? JSON.parse(localStorage.getItem(this.cacheTagName))
+        : JSON.parse(sessionStorage.getItem(this.cacheTagName))
+    if (sesData) {
+      delete sesData[key]
+
+      this.storage == 'local'
+        ? localStorage.setItem(this.cacheTagName, JSON.stringify(sesData))
+        : sessionStorage.setItem(this.cacheTagName, JSON.stringify(sesData))
+    }
+  }
+
   
 }
 
