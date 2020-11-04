@@ -1,14 +1,18 @@
-import { Directive, ElementRef, OnInit, AfterViewInit, Input } from '@angular/core';
+import { Directive, ElementRef, OnInit, AfterViewInit, Input, ContentChild, OnChanges } from '@angular/core';
 import { Loading } from '../../loading/loading.service';
 import { fromEvent } from 'rxjs';
 import { debounceTime, pluck } from 'rxjs/operators';
+import { Router, NavigationEnd } from '@angular/router';
+import { style } from '@angular/animations';
 
 @Directive( {
     selector: '[strechHeight]',
 })
-export class StretchHeightDirective implements OnInit{
+export class StretchHeightDirective implements OnInit,  AfterViewInit{
 
     @Input() startingPoint: number
+
+    innerHeight
 
     public smallWidth = 450
     public medWidth = 700
@@ -16,27 +20,46 @@ export class StretchHeightDirective implements OnInit{
     public extraLargeWidth = 1600
     public fullHeight = window.innerHeight
     public fullWidth = window.innerWidth
-
+    
 
     constructor (
         private elementRef: ElementRef,
-        private loading: Loading
-
+        private loading: Loading,
+        private router: Router
     ) {
         this.startingPoint = 50
     }
 
+
+
     ngOnInit() {
-        
         fromEvent( window, 'load' ).pipe(
             debounceTime( 500 ), pluck( 'currentTarget', 'innerHeight')
-        ).subscribe( event => { this.heightStreched(event) } )
+        ).subscribe(event => {
+            this.innerHeight = event
+            // console.log('load');
+            this.heightStreched(event)
+        })
         
         fromEvent( window, 'resize' ).pipe(
             debounceTime( 500 ), pluck( 'currentTarget', 'innerHeight' )
-        ).subscribe( event => { this.heightStreched(event)})
+        ).subscribe(event => {
+            this.innerHeight = event
+            // console.log('resize');
+            this.heightStreched(event)
+        })
+        
     }
 
+     async ngAfterViewInit() {
+         
+        // console.log('navigate');
+        await this.loading.waitFor(100)
+        this.heightStreched(window.innerHeight)
+        
+    }
+    
+    
     
 
     public get deviceSize() {
@@ -51,11 +74,16 @@ export class StretchHeightDirective implements OnInit{
         }
     }
     
-    heightStreched( currentHeight ) {
+    
+    heightStreched(currentHeight) {
+        // console.log(this.elementRef.nativeElement.getBoundingClientRect());
         var y = this.elementRef.nativeElement.getBoundingClientRect().y
-        var height = this.deviceSize != 'small' ? 
-            currentHeight - y : currentHeight - y - this.startingPoint
-        this.elementRef.nativeElement.style.height = height+'px'
+        var height = this.deviceSize != 'small'
+            ? currentHeight - y
+            : currentHeight - y - this.startingPoint
+        // console.log({y, height});
+        this.elementRef.nativeElement.style.height = height + 'px'
+        // console.log({[this.elementRef.nativeElement.id]: this.elementRef.nativeElement.style.height});
             
     }
 
