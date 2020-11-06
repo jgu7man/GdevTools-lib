@@ -21,7 +21,8 @@ export class GdevCommonsService {
   async preventDuplicated( element: string | object, list: any[], key?: string ) {
     var elementFinded
     if ( typeof element === 'object' ) {
-      var newName = element[ key ]
+      var newName = element[key]
+      console.log({element, list, key});
       elementFinded = list.find( item => item[ key ] === newName )
       if ( elementFinded ) {
         // [ 1, 2, 3 ].forEach(t => {

@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {object} from 'firebase-functions/lib/providers/storage';
-import { Observable, Subject, interval, of, Observer, throwError } from 'rxjs';
-import { pluck, tap, distinctUntilKeyChanged, takeWhile, takeUntil, flatMap, mergeMap, switchMap, map, first, distinctUntilChanged } from 'rxjs/operators';
+import { Observable, Subject, interval, of, Observer, throwError, iif } from 'rxjs';
+import { pluck, tap, distinctUntilKeyChanged, takeWhile, takeUntil, flatMap, mergeMap, switchMap, map, first, distinctUntilChanged, concatMap, concatAll, timeoutWith, timeout, catchError } from 'rxjs/operators';
 
 @Injectable({
     providedIn: 'root'
@@ -88,25 +88,30 @@ export class CacheService {
         if (!result) {
             return new Promise<T>((resolve) => {
 
+                
                 intervalToWait.pipe(
-                    takeWhile(intent =>  intent <= (secondsToWaitFor ? secondsToWaitFor : 10)),
-                    map( () => this.listenForChanges(keyExpected).pipe(first()).toPromise() ),
-                    // tap(() => {console.log(keyExpected, 'intent')})
-                ).subscribe(async res => {
-                    // console.log(res);
-                    if (typeof res != 'number') {
-                        let result = await res
-                        // console.log(result);
-                        if (result) {resolve(result[keyExpected] as T)}
-                        else {
-                            console.log('Se acabó el tiempo');
+                    takeWhile(intent => intent <= (secondsToWaitFor ? secondsToWaitFor : 5)),
+                    map( (intent) => {
+                        let res = this.getDataKey<T>(keyExpected)
+                        // console.log(keyExpected,res);
+                        return res ? res : intent 
+                    }),
+                    takeWhile(result => typeof result == 'number' )
+                )
+                    .subscribe(result => {
+                        // console.log(keyExpected, result);
+                        if (result === (secondsToWaitFor ? secondsToWaitFor : 5)) {
+                            // console.log('Se acabó el tiempo: ', keyExpected);
                             resolve(null)
-                        }
-                    } else if (res == (secondsToWaitFor ? secondsToWaitFor : 10)) {
-                        console.log('Se acabó el tiempo');
-                        resolve(null)
+                        } //else if (typeof result != 'number') {
+                            else {
+                                // console.log(keyExpected, result);
+                                resolve(result as T)
+                            
+                            }
+                        //}
                     }
-                })
+                )
 
 
             })
