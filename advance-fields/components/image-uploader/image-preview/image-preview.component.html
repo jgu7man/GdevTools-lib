@@ -2,7 +2,7 @@
 
     <img [id]="image ? image.name : ''" [src]="srcPreview ? srcPreview.url : ''">
     
-    <span *ngIf="(srcPreview | json) != ({} | json)" class="delItem" (click)="deleteFile()">
+    <span *ngIf="validateSrcPreview(srcPreview)" class="delItem" (click)="deleteFile()">
         <i class="fas fa-times-circle"></i>
     </span>
     

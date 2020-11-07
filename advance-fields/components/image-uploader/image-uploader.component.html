@@ -1,6 +1,6 @@
 <div class="row">
     <ng-container *ngIf="multiple; else single">
-        <div class="col s12">
+        <div class="col s4">
             
             <button mat-raised-button
             color="primary"
@@ -11,10 +11,11 @@
             <input id="fileInput" multiple type="file" name="files" #files
             (change)="onFilesSelected($event)">
         </div>
-        <div class="col s12" id="imgArea">
+        <div class="col s4" id="imgArea">
             <gdev-image-preview
             *ngFor="let preview of srcGroup"
             [srcPreview]="preview"
+            (imageURL)="setResult($event)"
             (onDeleted)="itemDeleted.emit($event)"
             ></gdev-image-preview>
             

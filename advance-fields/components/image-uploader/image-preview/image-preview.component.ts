@@ -31,7 +31,7 @@ export class ImagePreviewComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.imageSubs = this._image.pipe(
       distinctUntilChanged(),
-    ).subscribe( image => {
+    ).subscribe(image => {
       if ( image ) {
         if ( image instanceof File ) {
           this.image = image
@@ -40,6 +40,14 @@ export class ImagePreviewComponent implements OnInit, OnDestroy {
         }
       }
     })
+  }
+
+  validateSrcPreview(src) {
+    if (src == undefined || src == {} || src == '') {
+      return false
+    } else {
+      return true
+    }
   }
 
   
@@ -57,21 +65,22 @@ export class ImagePreviewComponent implements OnInit, OnDestroy {
   async uploadStorage() {
     const
       name = !this.prefix
-        ? `${ this.image.name }-${ new Date().getTime() }`
+        ? `${new Date().getTime() }-${ this.image.name }`
         : `${this.prefix}-${this.image.name}`,
       path = `${ this.folder }/${ name }`,
       ref = this.storage.ref( path ),
       task = this.storage.upload( path, this.image );
 
-    await task.percentageChanges().subscribe( res => {
+    task.percentageChanges().subscribe(res => {
+      console.log(res);
       return this.imageLoadPercent = res
     } )
 
-    await task.snapshotChanges().pipe(
+    task.snapshotChanges().pipe(
       finalize( async () => {
         await ref.getDownloadURL()
           .subscribe( res => {
-            this.srcPreview = { url: res, alt: this.image.name }
+            this.srcPreview = {url: res, alt: this.image.name}
             this.imageURL.emit( this.srcPreview )
             var img: any = document.getElementById( this.image.name )
             img.src = ''
