@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {object} from 'firebase-functions/lib/providers/storage';
 import { Observable, Subject, interval, of, Observer, throwError, iif } from 'rxjs';
-import { pluck, tap, distinctUntilKeyChanged, takeWhile, takeUntil, flatMap, mergeMap, switchMap, map, first, distinctUntilChanged, concatMap, concatAll, timeoutWith, timeout, catchError } from 'rxjs/operators';
+import { pluck, tap, distinctUntilKeyChanged, takeWhile, takeUntil, flatMap, mergeMap, switchMap, map, first, distinctUntilChanged, concatMap, concatAll, timeoutWith, timeout, catchError, startWith } from 'rxjs/operators';
 
 @Injectable({
     providedIn: 'root'
@@ -45,10 +45,15 @@ export class CacheService {
 
 
     listenForChanges<T>(key: string): Observable<T> {
+        let data = this.getDataKey<T>(key)
         return this.updateChanges$.pipe(
             // key ? ( 
-                distinctUntilChanged((x,y) => x[key] !== y[key]),
-                pluck<any, T>(key)
+            // mergeMap(res => iif(() => data != null, of({[key]:data}), of(res))), 
+            startWith({[key]:data}),
+            // tap(res => console.log(res)),
+            distinctUntilChanged((x,y) => x[key] !== y[key]),
+            pluck<any, T>(key),
+            // tap(res => console.log(res)),
                 // )
                 // : null,
         )
