@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {object} from 'firebase-functions/lib/providers/storage';
-import { Observable, Subject, interval, of, Observer, throwError, iif } from 'rxjs';
-import { pluck, tap, distinctUntilKeyChanged, takeWhile, takeUntil, flatMap, mergeMap, switchMap, map, first, distinctUntilChanged, concatMap, concatAll, timeoutWith, timeout, catchError, startWith } from 'rxjs/operators';
+import { Observable, Subject, interval, of, Observer, throwError, iif, race } from 'rxjs';
+import { pluck, tap, distinctUntilKeyChanged, takeWhile, takeUntil, flatMap, mergeMap, switchMap, map, first, distinctUntilChanged, concatMap, concatAll, timeoutWith, timeout, catchError, startWith, take, skipWhile } from 'rxjs/operators';
 
 @Injectable({
     providedIn: 'root'
@@ -86,37 +86,46 @@ export class CacheService {
 
 
     
-    async getAsyncKey<T>(keyExpected: string, secondsToWaitFor?: number, iterateSpeed?: number) {
-        const intervalToWait = interval(iterateSpeed ? iterateSpeed : 1000)    
+    async getAsyncKey<T>(keyExpected: string, intervalsToWaitFor?: number, iterateSpeed?: number) {
+        const intervalToWait = interval(iterateSpeed ? iterateSpeed : 1000)  
+        intervalsToWaitFor = intervalsToWaitFor ? intervalsToWaitFor : 5
+        
         var result = this.getDataKey<T>(keyExpected) 
         // console.log(keyExpected, result);
         if (!result) {
             return new Promise<T>((resolve) => {
 
                 
-                intervalToWait.pipe(
-                    takeWhile(intent => intent <= (secondsToWaitFor ? secondsToWaitFor : 5)),
-                    map( (intent) => {
-                        let res = this.getDataKey<T>(keyExpected)
-                        // console.log(keyExpected,res);
-                        return res ? res : intent 
-                    }),
-                    takeWhile(result => typeof result == 'number' )
-                )
-                    .subscribe(result => {
-                        // console.log(keyExpected, result);
-                        if (result === (secondsToWaitFor ? secondsToWaitFor : 5)) {
-                            // console.log('Se acabó el tiempo: ', keyExpected);
-                            resolve(null)
-                        } //else if (typeof result != 'number') {
-                            else {
-                                // console.log(keyExpected, result);
-                                resolve(result as T)
+					intervalToWait.pipe(
+                        
+                        map( (intent) => {
+                            let result = this.getDataKey<T>(keyExpected)
+                            // console.log(keyExpected, result)
+					        return result ? result : intent
+                        }),
+                        skipWhile(result => {
+                            // console.log(result);
+                            if( typeof result == 'number'  &&
+                                result <= intervalsToWaitFor
+                            ) { return true} else {return false}
                             
-                            }
-                        //}
-                    }
-                )
+                        }),
+                        take(1),
+					)
+					.subscribe(result => {
+						// console.log(keyExpected, result);
+						if (result === intervalsToWaitFor) {
+							// console.log('Se acabó el tiempo: ', keyExpected);
+							resolve(null);
+						} else if (typeof result != "number") {
+							// {
+							// console.log(keyExpected, result);
+							resolve(result as T);
+						}
+						//}
+                    }, error => console.log(error),
+                    // () => {console.log(keyExpected, 'complete');}
+                    );
 
 
             })
