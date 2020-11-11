@@ -49,8 +49,8 @@ export class CacheService {
         return this.updateChanges$.pipe(
             // key ? ( 
             // mergeMap(res => iif(() => data != null, of({[key]:data}), of(res))), 
-            startWith({[key]:data}),
             // tap(res => console.log(res)),
+            startWith({[key]:data}),
             distinctUntilChanged((x,y) => x[key] !== y[key]),
             pluck<any, T>(key),
             // tap(res => console.log(res)),
@@ -87,7 +87,7 @@ export class CacheService {
 
     
     async getAsyncKey<T>(keyExpected: string, intervalsToWaitFor?: number, iterateSpeed?: number) {
-        const intervalToWait = interval(iterateSpeed ? iterateSpeed : 1000)  
+        const timeToWait = interval(iterateSpeed ? iterateSpeed : 1000)  
         intervalsToWaitFor = intervalsToWaitFor ? intervalsToWaitFor : 5
         
         var result = this.getDataKey<T>(keyExpected) 
@@ -96,7 +96,7 @@ export class CacheService {
             return new Promise<T>((resolve) => {
 
                 
-					intervalToWait.pipe(
+					timeToWait.pipe(
                         
                         map( (intent) => {
                             let result = this.getDataKey<T>(keyExpected)
@@ -104,16 +104,16 @@ export class CacheService {
 					        return result ? result : intent
                         }),
                         skipWhile(result => {
-                            // console.log(result);
+                            // console.log({result, intervalsToWaitFor});
                             if( typeof result == 'number'  &&
-                                result <= intervalsToWaitFor
+                                result < intervalsToWaitFor
                             ) { return true} else {return false}
                             
                         }),
                         take(1),
 					)
 					.subscribe(result => {
-						// console.log(keyExpected, result);
+						// console.log({ keyExpected, result, intervalsToWaitFor });
 						if (result === intervalsToWaitFor) {
 							// console.log('Se acabó el tiempo: ', keyExpected);
 							resolve(null);
