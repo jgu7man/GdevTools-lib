@@ -28,7 +28,7 @@ export class GdevReacvtiveDialogboxComponent implements AfterViewInit, OnDestroy
     this.textSub = fromEvent<KeyboardEvent>( this.mensajeInput.nativeElement, 'keyup' ).pipe(
       pluck<KeyboardEvent, string>( 'target', 'value' ),
       startWith(this.text ? this.text : ''),
-      debounceTime( 500 ),
+      debounceTime( 1000 ),
       distinctUntilChanged()
     )
 
