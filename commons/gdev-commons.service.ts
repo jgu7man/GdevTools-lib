@@ -63,6 +63,24 @@ export class GdevCommonsService {
   }
 
 
+  sortBy<T>(array: any[], key:string) {
+    let arraySorted = array.sort((a, b) => {
+      
+      if (a[key] < b[key]) {
+        return -1;
+      }
+      if (a[key] > b[key]) {
+        return 1;
+      }
+      return 0;
+    })
+
+
+    return arraySorted as T[]
+  }
+
+ 
+
   
   
 }
