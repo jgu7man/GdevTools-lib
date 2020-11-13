@@ -28,6 +28,10 @@ export class ColorService {
     return randomColor;
   }
 
+  generateHSLcolor(saturation: number, light: number) {
+    return `hsl(${Math.ceil(360 * Math.random())},${saturation}%,${light}%)`;
+  }
+
   generateBrightColor() {
     return "hsl(" + Math.ceil(360 * Math.random()) + ",60%,90%)";
   }
