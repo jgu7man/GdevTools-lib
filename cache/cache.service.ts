@@ -1,6 +1,8 @@
 import {Injectable} from '@angular/core';
 import { Observable, Subject, interval, of, Observer, throwError, iif, race } from 'rxjs';
-import { pluck, tap, distinctUntilKeyChanged, takeWhile, takeUntil, flatMap, mergeMap, switchMap, map, first, distinctUntilChanged, concatMap, concatAll, timeoutWith, timeout, catchError, startWith, take, skipWhile } from 'rxjs/operators';
+import { pluck, tap, distinctUntilKeyChanged, takeWhile, takeUntil, flatMap, mergeMap, switchMap, map, first, distinctUntilChanged, concatMap, concatAll, timeoutWith, timeout, catchError, startWith, take, skipWhile, debounceTime } from 'rxjs/operators';
+
+
 
 @Injectable({
     providedIn: 'root'
@@ -10,30 +12,32 @@ export class CacheService {
     cacheTagName: string = 'gdev-data'
     storage: 'local' | 'session' = 'session'
     updateChanges$: Subject<any> = new Subject()
+    storageData:any
 
     constructor () {}
 
-    updateData<T>(key, value) {
-        var storageData = JSON.parse(
+    updateData<T>( key, value, type?) {
+        
+        this.storageData = JSON.parse(
             this.storage == 'local'
                 ? localStorage.getItem(this.cacheTagName)
                 : sessionStorage.getItem(this.cacheTagName)
         )
 
 
-        if (storageData) {
-            storageData[key] = value
+        if (this.storageData) {
+            this.storageData[key] = value
             this.storage == 'local'
-                ? localStorage.setItem(this.cacheTagName, JSON.stringify(storageData))
-                : sessionStorage.setItem(this.cacheTagName, JSON.stringify(storageData))
+                ? localStorage.setItem(this.cacheTagName, JSON.stringify(this.storageData))
+                : sessionStorage.setItem(this.cacheTagName, JSON.stringify(this.storageData))
         } else {
-            storageData = {[key]: value}
+            this.storageData = {[key]: value}
             this.storage == 'local'
-                ? localStorage.setItem(this.cacheTagName, JSON.stringify(storageData))
-                : sessionStorage.setItem(this.cacheTagName, JSON.stringify(storageData))
+                ? localStorage.setItem(this.cacheTagName, JSON.stringify(this.storageData))
+                : sessionStorage.setItem(this.cacheTagName, JSON.stringify(this.storageData))
         }
 
-        this.updateChanges$.next(storageData)
+        this.updateChanges$.next(this.storageData)
         return this.updateChanges$.pipe(
             distinctUntilKeyChanged(key),
             pluck<any, T>(key),
@@ -48,11 +52,9 @@ export class CacheService {
         return this.updateChanges$.pipe(
             // key ? ( 
             // mergeMap(res => iif(() => data != null, of({[key]:data}), of(res))), 
-            // tap(res => console.log(res)),
             startWith({[key]:data}),
-            distinctUntilChanged((x,y) => x[key] !== y[key]),
+            distinctUntilKeyChanged( key, (x, y) =>  x == y ),
             pluck<any, T>(key),
-            // tap(res => console.log(res)),
                 // )
                 // : null,
         )
