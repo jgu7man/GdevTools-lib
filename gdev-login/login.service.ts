@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
 import { CacheService } from '../cache/cache.service';
 import { switchMap, take } from 'rxjs/operators';
 import { UserInterface } from './user.interface';
-import { auth } from 'firebase/app';
+import firebase from 'firebase/app';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Injectable({
@@ -60,7 +60,7 @@ export class LoginService {
   async googleSingIn() {
 
     // Abre el popup de autenticación
-    const provider = new auth.GoogleAuthProvider();
+    const provider = new firebase.auth.GoogleAuthProvider();
     var credential = await this.afAuth.signInWithPopup( provider )
 
     // Guardar los datos de cliente nuevo en firebase
@@ -70,7 +70,7 @@ export class LoginService {
   async facebookSingIn() {
 
     // Abre el popup de autenticación
-    const provider = new auth.FacebookAuthProvider();
+    const provider = new firebase.auth.FacebookAuthProvider();
     var credential = await this.afAuth.signInWithPopup( provider )
 
     // Guardar los datos de cliente nuevo en firebase
