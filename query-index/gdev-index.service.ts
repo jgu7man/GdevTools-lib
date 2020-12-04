@@ -112,8 +112,8 @@ export class GdevIndexService {
                 ? this.collectionSize
                 : 20 ;
         
-        // Define limit and get query
-        var query = await queryCollection.limit(this.queryCant).get()
+                    // Define limit and get query
+        var query = await queryCollection.limit(this.queryCant == 0 ? 20 :this.queryCant).get()
         
         this.pageContent = []
         if ( this.collectionSize > 0 ) {
