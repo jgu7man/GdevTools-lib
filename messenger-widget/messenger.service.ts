@@ -1,7 +1,7 @@
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Injectable } from '@angular/core';
 import { MessengerModel } from './messenger.model';
-import { AlertService } from 'src/app/gdev-tools/alerts/alert.service';
+import { AlertService } from '../alerts/alert.service';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +14,7 @@ export class MessengerService {
     private fs: AngularFirestore,
     private _alertas: AlertService
   ) { }
-  
+
   saveFacebookID( messenger: MessengerModel ) {
     Object.keys(messenger).forEach(key=> {if ( !messenger[key] ) delete messenger[key] })
     var messengerObject = {}

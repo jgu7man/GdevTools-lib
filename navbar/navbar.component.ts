@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { NavbarService } from './navbar.service';
-import { UserInterface } from 'src/app/gdev-tools/gdev-login/user.interface';
 import { LoginService } from '../gdev-login/login.service';
+import { UserInterface } from '../gdev-login/user.interface';
 
 @Component({
   selector: 'gdev-navbar',

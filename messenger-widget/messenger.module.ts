@@ -6,7 +6,8 @@ import { MessengerComponent } from './messenger.component';
 import { AdminMessengerComponent } from "./admin-messenger/admin-messenger.component";
 import { MaterialModule } from 'src/app/material.module';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { FirebaseModule } from '../../firebase.module';
+import { FirebaseModule } from '../firebase.module';
+
 
 @NgModule({
   declarations: [
