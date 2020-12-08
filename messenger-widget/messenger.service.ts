@@ -1,7 +1,7 @@
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Injectable } from '@angular/core';
 import { MessengerModel } from './messenger.model';
-import { AlertService } from 'src/app/Gdev-Tools/alerts/alert.service';
+import { AlertService } from 'src/app/gdev-tools/alerts/alert.service';
 
 @Injectable({
   providedIn: 'root'

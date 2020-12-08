@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject, Output, EventEmitter } from '@angular/core';
 import {MatDialog, MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
-import { CacheService } from '../../../../Gdev-Tools/cache/cache.service';
+import { CacheService } from '../../../../gdev-tools/cache/cache.service';
 import { LoginService } from '../../login.service';
 
 @Component({

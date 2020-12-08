@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { NavbarService } from './navbar.service';
-import { UserInterface } from 'src/app/Gdev-Tools/gdev-login/user.interface';
+import { UserInterface } from 'src/app/gdev-tools/gdev-login/user.interface';
 import { LoginService } from '../gdev-login/login.service';
 
 @Component({
