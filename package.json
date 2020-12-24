@@ -22,11 +22,11 @@
   "author": "jgu7man",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/jgu7man/Gdev-Tools/issues"
+    "url": "https://github.com/jgu7man/gdev-tools/issues"
   },
   "homepage": "https://github.com/jgu7man/Gdev-Tools#readme",
   "dependencies": {
-    "@agm/core": "^3.0.0-beta.0",
+    "@agm/core": "^1.1.0",
     "@types/jquery": "^3.5.1",
     "@types/materialize-css": "^1.0.8",
     "jquery": "^3.5.1",
