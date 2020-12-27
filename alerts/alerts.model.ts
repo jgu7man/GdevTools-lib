@@ -1,7 +1,7 @@
 export class MessageAlertModel {
     constructor(
         public message: string,
-        public type: 'mensaje' | 'pregunta',
+        public type?: 'mensaje' | 'pregunta',
         public trueMsg?: string,
         public falseMsg?: string,
         public confirmation?: boolean,

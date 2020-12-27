@@ -32,7 +32,7 @@ export class AlertService {
             typeof message != 'string' ?  message :
                 new MessageAlertModel( message, 'mensaje' )
         
-        if (!msgModel.trueMsg) msgModel.trueMsg = 'aceptar'
+        if (!msgModel.trueMsg) msgModel.trueMsg = 'Aceptar'
 
         this.dialog.open( AlertaPopupComponent, {
             minWidth: '450px',
@@ -46,25 +46,23 @@ export class AlertService {
 
     // Función que envía una pregunta como alerta
     // y espera la respuesta true o false del usuario
-    sendRequestAlert( request: MessageAlertModel | string ): MatDialogRef<AlertaPopupComponent> {
-        
-        var preguntaModel: MessageAlertModel = 
-            typeof request != 'string' ? request :
-                new MessageAlertModel(request, 'pregunta')
+    sendRequestAlert({ message, trueMsg, falseMsg}: MessageAlertModel ): Observable<boolean> {
 
-        if (!preguntaModel.trueMsg) preguntaModel.trueMsg = 'aceptar'
-        if ( !preguntaModel.falseMsg ) preguntaModel.falseMsg = 'cancelar'
+        if (!trueMsg) trueMsg = 'Aceptar'
+        if ( !falseMsg ) falseMsg = 'Cancelar'
+
+        let request: MessageAlertModel = {
+            message, trueMsg, falseMsg, type: 'pregunta'
+        }
         
         var dialog = this.dialog.open( AlertaPopupComponent, {
             minWidth: '450px',
-            data: preguntaModel,
+            data: request,
             role: 'alertdialog',
             disableClose: true
         } )
-        
-        // this.requestAlert$.next(preguntaModel)
 
-        return dialog
+        return dialog.afterClosed()
     }
 
     
