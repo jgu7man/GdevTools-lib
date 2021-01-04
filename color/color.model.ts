@@ -1,6 +1,6 @@
 export interface ColorPalette {
     primary?: string
-    acent?: string
+    accent?: string
     dark?: string
     danger?: string
     bg1?: string

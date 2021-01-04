@@ -10,7 +10,7 @@ export class ColorService {
   constructor () {
     this.ColorPalette = {
       primary: '#3D5AFE',
-      acent: '#FFF436',
+      accent: '#FFF436',
       dark: '#292F4D',
       danger: '#EE3333',
       bg1: '#EFF1FE',
