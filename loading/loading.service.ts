@@ -7,7 +7,12 @@ import { LoadingOverlayComponent } from "./components/loading-overlay/loading-ov
 
 @Injectable({ providedIn: "root" })
 export class Loading {
-	constructor(private router: Router, private activatedRoute: ActivatedRoute, private _dialog: MatDialog) {}
+
+	constructor (
+		private router: Router,
+		private activatedRoute: ActivatedRoute,
+		private _dialog: MatDialog,
+	) { }
 
 	waitFor = ms => new Promise(r => setTimeout(r, ms));
 
@@ -64,27 +69,30 @@ export class Loading {
 		};
 	}
 
-	colectRouteData(): Observable<any> {
+	collectRouteData(): Observable<any> {
 		return this.router.events.pipe(
 			filter(event => event instanceof NavigationEnd),
 			map(() => this.activatedRoute),
 			map(route => {
 				const data = { data: {}, params: {}, queryParams: {} };
-                
-                while ( route.firstChild ) {
-                    data.data = {
-                        ...data.data, ...route.snapshot.data
-                    };
-                    data.params = {
-                        ...data.params, ...route.snapshot.params
-                    };
-                    data.queryParams = {
-                        ...data.queryParams, ...route.snapshot.queryParams
-                    };
+
+				while (route.firstChild) {
+					data.data = {
+						...data.data,
+						...route.snapshot.data,
+					};
+					data.params = {
+						...data.params,
+						...route.snapshot.params,
+					};
+					data.queryParams = {
+						...data.queryParams,
+						...route.snapshot.queryParams,
+					};
 					route = route.firstChild;
 				}
 				return data;
-			}),
+			})
 			// filter(route => route.outlet === "primary")
 		);
 	}
@@ -151,18 +159,31 @@ export class Loading {
 		return this.waitngBar$;
 	}
 
-	public loadingSpinnerState: boolean = false;
 	public loadingBox: MatDialogRef<LoadingOverlayComponent>;
-	toggleWaitingSpinner(action?: boolean) {
-		if (action) {
-			this.loadingBox = this._dialog.open(LoadingOverlayComponent, {
-				panelClass: "loading-spinner",
-			});
-
-			this.loadingSpinnerState = action;
+	private afterSubs: Subscription
+	toggleWaitingSpinner( action: boolean ) {
+		
+		if ( action ) {
+			if ( !this.loadingBox ) {
+				console.log('open')
+				this.loadingBox = this._dialog.open(LoadingOverlayComponent, {
+					panelClass: "loading-spinner",
+				} );
+			}
+			else {
+				this.loadingBox.close();
+				this.afterSubs = 
+					this.loadingBox.afterClosed().subscribe( () => {
+					console.log('reopen')
+					this._dialog.open(LoadingOverlayComponent, {
+						panelClass: "loading-spinner",
+					} );
+				})
+			}
 		} else {
-			this.loadingBox.close();
-			this.loadingSpinnerState = action;
+			console.log('close')
+			this._dialog.closeAll()
+			if (this.afterSubs) this.afterSubs.unsubscribe()
 		}
 	}
 }
