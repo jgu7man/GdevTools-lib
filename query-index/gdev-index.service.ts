@@ -101,6 +101,7 @@ export class GdevIndexService {
         // Get the collection size to index
         var queryCollection = this.fs.collection( this.collection ).ref.orderBy( this.field, this.order )
         this.collectionSize = ( await queryCollection.get() ).size;
+        console.log( this.collectionSize )
         
         this.last = this.collectionSize < this.queryCant
             ? this.collectionSize

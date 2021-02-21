@@ -89,7 +89,8 @@ export class AlertService {
 
 
     sendError( mensaje: string, error: string ) {
-        const alert = new ErrorAlertModel(mensaje, error)
+        const alert = new ErrorAlertModel( mensaje, error )
+        this.fs.collection(`_admin/_main/errors`).add({error, mensaje})
         this.dialog.open( ErrorPopupComponent, {
             width: '400px',
             data: alert
