@@ -161,30 +161,35 @@ export class Loading {
 
 	public loadingBox: MatDialogRef<LoadingOverlayComponent>;
 	private afterSubs: Subscription
-	toggleWaitingSpinner( action: boolean ) {
-		
-		if ( action ) {
-			if ( !this.loadingBox ) {
-				console.log('open')
+	toggleWaitingSpinner( open: 'open' | 'close' | boolean ) {
+        // console.log(open)
+        open = open ? open : !open
+        console.log('open:', open);
+        if (open === true || open === 'open') {
+            console.log( this.loadingBox )
+			if (!this.loadingBox || this.loadingBox.getState() === 1 ) {
+				console.log('open loading animation')
 				this.loadingBox = this._dialog.open(LoadingOverlayComponent, {
 					panelClass: "loading-spinner",
-				} );
+                });
+                console.log( this.loadingBox.getState() )
 			}
 			else {
 				this.loadingBox.close();
-				this.afterSubs = 
+				this.afterSubs =
 					this.loadingBox.afterClosed().subscribe( () => {
-					console.log('reopen')
+					console.log('reopen loading animation')
 					this._dialog.open(LoadingOverlayComponent, {
 						panelClass: "loading-spinner",
 					} );
 				})
 			}
-		} else {
-			console.log('close')
-			this._dialog.closeAll()
+		} else if (!open || open === 'close') {
+            console.log('close loading animation')
+            this._dialog.closeAll()
 			if (this.afterSubs) this.afterSubs.unsubscribe()
 		}
+        console.log( this.loadingBox.getState() )
 	}
 }
 

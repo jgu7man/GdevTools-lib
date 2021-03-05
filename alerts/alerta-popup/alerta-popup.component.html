@@ -3,7 +3,15 @@
 <mat-dialog-content>
         <div class="row">
             <div class="col s12 center">
-                <p>{{alerta.message}}</p>
+                {{alerta.format}}
+                <div [ngSwitch]="alerta.format">
+                    <div *ngSwitchCase="'html'">
+                        <div [innerHTML]="alerta.message"></div>
+                    </div>
+                    <div *ngSwitchDefault>
+                        <p>{{alerta.message}}</p>
+                    </div>
+                </div>
             </div>
         </div>
     </mat-dialog-content>
@@ -18,13 +26,21 @@
 </ng-template>
     <ng-template #aviso>
         <mat-dialog-content>
-            
+
             <div class="row">
                 <div class="col s12 center">
-                    <p>{{alerta.message}}</p>
+                    {{alerta.format}}
+                    <div [ngSwitch]="alerta.format">
+                        <div *ngSwitchCase="'html'">
+                            <div [innerHTML]="alerta.message"></div>
+                        </div>
+                        <div *ngSwitchDefault>
+                            <p>{{alerta.message}}</p>
+                        </div>
+                    </div>
                 </div>
             </div>
-        
+
         </mat-dialog-content>
         <mat-dialog-actions style="display: flex; justify-content: space-around;">
             <div class="col s12 center">
@@ -32,3 +48,5 @@
             </div>
         </mat-dialog-actions>
     </ng-template>
+
+

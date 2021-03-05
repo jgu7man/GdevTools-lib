@@ -2,6 +2,7 @@ export class MessageAlertModel {
     constructor(
         public message: string,
         public type?: 'mensaje' | 'pregunta',
+        public format?: 'text' | 'html',
         public trueMsg?: string,
         public falseMsg?: string,
         public confirmation?: boolean,
@@ -19,6 +20,6 @@ export class PreguntaAlertaModel {
 export class ErrorAlertModel {
     constructor (
         public mensaje: string,
-        public systemError: string  
+        public systemError: string
     ){}
 }

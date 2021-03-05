@@ -11,13 +11,13 @@ import { AngularFirestore } from '@angular/fire/firestore';
 
 @Injectable({ providedIn: 'root' })
 export class AlertService {
-    
+
     messageAlert$ = new Subject<MessageAlertModel>()
     requestAlert$ = new Subject<MessageAlertModel>()
     errorAlert$ = new Subject<ErrorAlertModel>()
     responseAlert$ = new Subject<boolean>()
 
-    
+
 
     constructor (
         private dialog: MatDialog,
@@ -27,11 +27,13 @@ export class AlertService {
 
     // Función que envía un mensaje de alerta
     // y espera la confirmación de la lectura del usuario
-    sendMessageAlert(message: MessageAlertModel | string): Observable<any> {
+    sendMessageAlert(message: MessageAlertModel | string, format?: 'text' | 'html'): Observable<any> {
+        if (!format) format = 'text';
+        console.log( format )
         var msgModel: MessageAlertModel =
             typeof message != 'string' ?  message :
-                new MessageAlertModel( message, 'mensaje' )
-        
+                new MessageAlertModel( message, 'mensaje', format )
+
         if (!msgModel.trueMsg) msgModel.trueMsg = 'Aceptar'
 
         this.dialog.open( AlertaPopupComponent, {
@@ -39,7 +41,7 @@ export class AlertService {
             data: msgModel,
             role:'alertdialog'
         })
-        
+
         return this.responseAlert$
     }
 
@@ -54,7 +56,7 @@ export class AlertService {
         let request: MessageAlertModel = {
             message, trueMsg, falseMsg, type: 'pregunta'
         }
-        
+
         var dialog = this.dialog.open( AlertaPopupComponent, {
             minWidth: '450px',
             data: request,
@@ -65,7 +67,7 @@ export class AlertService {
         return dialog.afterClosed()
     }
 
-    
+
 
 
     sendFloatNotification(
@@ -73,7 +75,7 @@ export class AlertService {
         confirmText?: string,
         duration?: number,
         vPosition?: 'top' | 'bottom' ,
-        hPosition?: 'start' | 'center' | 'end' | 'left' | 'right' 
+        hPosition?: 'start' | 'center' | 'end' | 'left' | 'right'
     ) {
 
         confirmText = confirmText ? confirmText : 'ok';
@@ -95,8 +97,8 @@ export class AlertService {
             data: alert
         } )
     }
-    
-    
 
-    
+
+
+
 }
